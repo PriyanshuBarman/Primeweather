@@ -76,7 +76,6 @@ export const ApiProvider = ({ children }) => {
 
       setTimeZone(geoData.features[0].properties.timezone.name);
       const { city, address_line1, lat, lon } = geoData.features[0].properties;
-      console.log(geoData.features[0].properties);
       setCity(city ? city : address_line1);
       setCityDescription(city ? address_line1 : "");
 
@@ -86,16 +85,6 @@ export const ApiProvider = ({ children }) => {
       } else {
         setLastSearch({ lat, lon });
       }
-
-      // if (cityName) {
-      //   const { city, address_line1 } = geoData.features[0].properties;
-      //   setCity(city ? city : address_line1);
-      //   setCityDescription(city ? address_line1 : "");
-      //   setLastSearch({ city: cityName });
-      // } else {
-      //   const { lat, lon } = geoData.features[0].properties;
-      //   setLastSearch({ lat, lon });
-      // }
 
       // Update states
       setWeatherData(weatherData);
@@ -110,14 +99,11 @@ export const ApiProvider = ({ children }) => {
       setIsLoading(false);
     }
   };
-
   useEffect(() => {
-    if (lastSearch) {
-      if (lastSearch.city) {
-        search(lastSearch.city);
-      } else if (lastSearch.lat && lastSearch.lon) {
-        search(lastSearch.lat, lastSearch.lon);
-      }
+    if (lastSearch?.city) {
+      search(lastSearch.city);
+    } else if (lastSearch?.lat && lastSearch?.lon) {
+      search(lastSearch.lat, lastSearch.lon);
     } else {
       search("Mumbai");
     }
@@ -211,7 +197,6 @@ export const ApiProvider = ({ children }) => {
       precipitationProbability: Math.round(
         hourlyData[index]?.values.precipitationProbability,
       ),
-
       humidity: Math.round(hourlyData[index]?.values.humidity),
       clouds: Math.round(hourlyData[index]?.values.cloudCover),
       visibility: Math.round(hourlyData[index]?.values.visibility),
