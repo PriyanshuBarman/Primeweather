@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  @apply font-oxanium;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+::selection {
+  color: #ffa528;
+}
+
+.hover-scale {
+  @apply ease-linear md:transition-all md:hover:scale-105;
+}
+.hover-scale-2 {
+  @apply ease-linear md:transition-all md:duration-[700ms] md:hover:scale-[1.015];
+}
+
+.bottomToTop {
+  opacity: 0;
+  transform: translateY(100%);
+  animation: slideBottom 0.3s 0.5s ease-out forwards;
+}
+
+@keyframes slideBottom {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.topToBottom {
+  opacity: 0;
+  transform: translateY(-100%); /* Start off-screen above */
+  animation: slideTop 0.3s 0.5s ease-out forwards; /* Match delay and timing */
+}
+
+@keyframes slideTop {
+  from {
+    transform: translateY(-100%); /* Start off-screen above */
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0); /* End at normal position */
+    opacity: 1;
+  }
+}
+
+meter::-webkit-meter-bar {
+  background: #dddddd;
+  border-radius: 4px;
+}
+meter::-webkit-meter-optimum-value {
+  background: #22c55e;
+}
+meter::-webkit-meter-suboptimum-value {
+  background: #f59e0b;
+}
+meter::-webkit-meter-even-less-good-value {
+  background: #ef4444;
+}
+
+meter {
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+}
+
+
