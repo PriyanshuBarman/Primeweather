@@ -2,9 +2,9 @@ import React, { memo } from "react";
 import { RiArrowRightWideFill } from "react-icons/ri";
 import { WiRaindrops } from "react-icons/wi";
 import { useNavigate } from "react-router-dom";
-import { useApiData } from "../Context/ApiContext";
-import { useSidebar } from "../Context/SidebarContext";
-import DailyForecastSkeleton from "./Skeletons/DailyForecastSkeleton";
+import { useApiData } from "../context/ApiContext";
+import { useSidebar } from "../context/SidebarContext";
+import DailyForecastSkeleton from "./skeletons/DailyForecastSkeleton";
 
 const DailyForecast = () => {
   const { isDailyForecastHidden } = useSidebar();
@@ -48,32 +48,32 @@ const Card = memo(({ index }) => {
       onClick={handleClick}
       className="DailyCards hover-scale relative flex h-[80px] w-[92%] cursor-pointer items-center justify-around overflow-hidden rounded-xl border-l border-t border-black/10 from-blue-300 to-blue-600 py-[2%] pr-6 shadow-md shadow-black/20 dark:border-white/5 dark:bg-[#1d1d1d] dark:text-white/90 dark:shadow-black md:h-[83px] md:w-full md:bg-gradient-to-br md:text-white md:dark:bg-none"
     >
-      <h5 className="absolute left-0 top-0 w-[30%] rounded-br-2xl bg-black/5 text-center text-[.74rem] font-[500] italic shadow-sm shadow-black/20 dark:bg-white/20 dark:text-white/80 dark:shadow-black md:w-[35%] md:text-[.8rem]">
+      <h5 className="absolute left-0 top-0 w-[30%] rounded-br-2xl bg-black/5 text-center text-[.74rem] font-[500] italic shadow-sm shadow-black/20 dark:bg-white/20 dark:text-white/80 dark:shadow-black md:w-[35%] md:text-[.75rem]">
         {dayName}
       </h5>
 
       <div className="mt-1 flex h-full items-center">
         <img
-          className="size-[3.5rem] rounded-xl md:mt-2 md:size-[4.3rem]"
+          className={`${imageName === "Clear" ? "md:size-[3.8rem]" : "md:size-[4.3rem]"} size-[3.5rem] rounded-xl md:mt-2`}
           src={`/${imageName}.png`}
           alt=""
         />
       </div>
-      <h2 className="flex h-full w-[30%] items-center justify-center text-[.95rem] font-[500] capitalize leading-3 md:text-lg md:italic">
+      <h2 className="flex h-full w-[30%] items-center justify-center truncate text-[.95rem] font-[500] capitalize leading-3 md:text-base md:italic">
         {description}
       </h2>
       <div className="flex h-full flex-col items-center justify-center">
-        <h2 className="text-xl font-semibold md:text-[1.4rem] md:leading-5">
+        <h2 className="text-xl font-[550] md:text-[1.3rem] md:font-[500] md:leading-5">
           {temperature}°c
         </h2>
 
-        {precipitationProbability > 20 ? (
-          <h5 className="precipitation relative left-1 top-1 text-base font-[500]">
+        {precipitationProbability > 10 ? (
+          <h5 className="precipitation relative left-1 top-1 text-sm font-[500]">
             {precipitationProbability}%
             <WiRaindrops className="absolute -left-10 -top-4 size-14 fill-blue-600 md:-left-12 md:size-16 md:fill-white" />
           </h5>
         ) : (
-          <h2 className="text- mt-1 items-center font-[500]">
+          <h2 className="mt-1.5 items-center text-sm font-[500]">
             {minTemp}°c /{maxTemp}°c
           </h2>
         )}

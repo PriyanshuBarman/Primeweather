@@ -1,30 +1,21 @@
-import React, { createContext, useContext, useState, useCallback } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useRef,
+} from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 const SearchContext = createContext();
 
 export const SearchProvider = ({ children }) => {
-  const [isSearchPageOpen, setIsSearchPageOpen] = useState(false);
-  const [suggestions, setSuggestions] = useState([]);
-  const [searchHistory, setSearchHistory] = useLocalStorage(
-    "searchHistory",
-    [],
-  );
-
-  const openSearchPage = () => setIsSearchPageOpen(true);
-  const closeSearchPage = () => setIsSearchPageOpen(false);
+  const searchBarRef = useRef(null);
+  const [searchHistory, setSearchHistory] = useLocalStorage("searchHistory",[]); // prettier-ignore
 
   const clearAllHistory = useCallback(() => {
     setSearchHistory([]);
   }, [setSearchHistory]);
-
-  const clearHistoryItem = useCallback(
-    (city) => {
-      const updatedHistory = searchHistory.filter((i) => i.city !== city);
-      setSearchHistory(updatedHistory);
-    },
-    [searchHistory, setSearchHistory],
-  );
 
   const addToSearchHistory = useCallback(
     (city, lat = null, lon = null) => {
@@ -44,15 +35,10 @@ export const SearchProvider = ({ children }) => {
   return (
     <SearchContext.Provider
       value={{
-        openSearchPage,
-        closeSearchPage,
-        clearHistoryItem,
+        searchBarRef,
         clearAllHistory,
-        isSearchPageOpen,
         searchHistory,
-        suggestions,
         addToSearchHistory,
-        setIsSearchPageOpen,
       }}
     >
       {children}

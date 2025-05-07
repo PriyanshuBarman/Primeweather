@@ -1,10 +1,10 @@
 import React from "react";
-import ForecastSunTimesSkeleton from "./ForecastSunTimesSkeleton";
-import HighlightsSkeleton from "./HighlightsSkeleton";
 import PageHeaderSkeleton from "./PageHeaderSkeleton";
-import PreviewCardSkeleton from "./PreviewCardSkeleton";
-import MadeWithLove from "./MadeWithLove";
 import { useMediaQuery } from "react-responsive";
+import ForecastSunTimesSkeleton from "./ForecastSunTimesSkeleton";
+import MadeWithLove from "./MadeWithLove";
+import WeatherHighlightsSkeleton from "./WeatherHighlightsSkeleton";
+import PreviewCardSkeleton from "./PreviewCardSkeleton";
 
 const ForecastSkeleton = () => {
   const isDeskTop = useMediaQuery({ minWidth: 768 });
@@ -46,14 +46,14 @@ const ForecastSkeleton = () => {
             {isDeskTop && <ForecastSunTimesSkeleton />}
           </div>
           <div className="rounded-3xl md:h-[91%] md:w-[40%] md:pt-2 md:shadow-md md:dark:bg-[#1c1c1c] md:dark:shadow-md md:dark:shadow-black">
-            <HighlightsSkeleton />
+            <WeatherHighlightsSkeleton />
           </div>
         </div>
         {!isDeskTop && <ForecastSunTimesSkeleton />}
       </div>
       {isDeskTop ? (
-        <div className="flex h-screen w-[20%] items-center justify-center bg-gradient-to-b from-transparent to-blue-500 dark:to-white/70">
-          <span className="text-center text-2xl font-[500] text-white dark:text-black">
+        <div className="flex h-screen w-[20%] items-center justify-center">
+          <span className="text-center text-2xl font-[500] text-dark/90 dark:text-white/80">
             Fetching Data... .
           </span>
         </div>

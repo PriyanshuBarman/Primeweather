@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import { IoMdSearch } from "react-icons/io";
-import { useApiData } from "../Context/ApiContext";
-import { useSearch } from "../Context/SearchContext";
+import { useApiData } from "../context/ApiContext";
+import { useSearch } from "../context/SearchContext";
 
 const ErrPage = () => {
   const { isLoading, errCode } = useApiData();

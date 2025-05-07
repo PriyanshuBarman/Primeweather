@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { BiSolidHide } from "react-icons/bi";
 import { BsFillMoonStarsFill } from "react-icons/bs";
 import { PiSunFill } from "react-icons/pi";
-import { useApiData } from "../Context/ApiContext";
-import { useSidebar } from "../Context/SidebarContext";
-import SunriseSunsetSkeleton from "./Skeletons/SunriseSunsetSkeleton";
+import { useApiData } from "../context/ApiContext";
+import { useSidebar } from "../context/SidebarContext";
+import SunriseSunsetSkeleton from "./skeletons/SunriseSunsetSkeleton";
+import Tooltip from "./Tooltip";
 
 const SunriseSunset = () => {
   const { currentData, isLoading } = useApiData();
@@ -132,21 +132,21 @@ const SunriseSunset = () => {
         </svg>
 
         <div className="absolute flex h-[.077rem] w-full items-center justify-center bg-black/50 dark:bg-white/50">
-          <div className="absolute w-[21%] rounded-full border-b-[1.5px] border-t-[1.5px] border-black/40 bg-[#f9f9f9] text-center text-[75%] font-[500] italic leading-3 dark:border-white/25 dark:bg-[#1f1f1f] md:text-xs">
+          <div className="absolute w-[21%] rounded-full border-b-[1.5px] border-t-[1.5px] border-black/40 bg-[#f9f9f9] text-center text-[75%] font-[500] italic leading-3 dark:border-white/25 dark:bg-[#1f1f1f] md:text-[0.72rem]">
             Horizon
           </div>
 
           {/* Sunrise Sunset */}
           <div className="absolute right-0 flex h-5 w-full items-center justify-center">
-            <h1 className="absolute left-7 flex flex-col gap-2 text-[.88rem] font-[600] italic md:gap-1 md:text-base">
+            <h1 className="absolute left-7 flex flex-col gap-2 text-[.88rem] font-[600] italic md:gap-1 md:text-sm">
               Sunrise
-              <span className="text-[.9rem] font-[500] md:text-lg">
+              <span className="text-[.9rem] font-[500] md:text-base">
                 {sunRise}
               </span>
             </h1>
-            <h1 className="absolute right-7 flex flex-col gap-2 text-[.88rem] font-[600] italic md:gap-1 md:text-base">
+            <h1 className="absolute right-7 flex flex-col gap-2 text-[.88rem] font-[600] italic md:gap-1 md:text-sm">
               Sunset
-              <span className="text-[.9rem] font-[500] md:text-lg">
+              <span className="text-[.9rem] font-[500] md:text-base">
                 {sunSet}
               </span>
             </h1>
@@ -162,9 +162,10 @@ const SunriseSunset = () => {
           </div>
         </div>
       </div>
-      <div
+      <Tooltip  name={"sunriseSunset"} showTooltip={showTooltip} />
+      {/* <div
         onClick={() => toggleWidget("sunriseSunset")}
-        className={`absolute -top-1 right-16 mb-4 md:transition-all duration-200  hover:scale-110 ${
+        className={`absolute -top-1 right-16 mb-4 duration-200 hover:scale-110 md:transition-all ${
           showTooltip
             ? "-translate-y-10 scale-100 opacity-100"
             : "-translate-y-0 scale-0 opacity-0"
@@ -177,7 +178,7 @@ const SunriseSunset = () => {
           </div>
           <div className="absolute bottom-[-8px] left-1/2 -translate-x-1/2 border-l-[4px] border-r-[8px] border-t-[8px] border-l-transparent border-r-transparent border-t-blue-400 dark:border-t-white"></div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

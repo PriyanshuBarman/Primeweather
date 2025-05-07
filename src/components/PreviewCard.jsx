@@ -1,14 +1,13 @@
 import React, { memo } from "react";
-import { useApiData } from "../Context/ApiContext";
-import PreviewCardSkeleton from "./Skeletons/PreviewCardSkeleton";
+import { useApiData } from "../context/ApiContext";
+import { useTime } from "../hooks/useTime";
+import PreviewCardSkeleton from "./skeletons/PreviewCardSkeleton";
 import WeatherStats from "./WeatherStats";
 
 const PreviewCard = ({ index }) => {
-  const { isLoading, currentData, getDailyData } = useApiData();
+  const { isLoading, currentData, getDailyData, timeZone } = useApiData();
   if (isLoading) return <PreviewCardSkeleton />;
-
   const data = index !== undefined ? getDailyData(index) : currentData;
-
   const {
     temperature,
     feelsLike,
@@ -21,17 +20,19 @@ const PreviewCard = ({ index }) => {
 
   return (
     <div className="hover-scale-2 relative m-auto mb-4 mt-3 flex h-[272px] w-[96%] flex-col items-center rounded-[1.5rem] bg-gradient-to-br from-blue-400 to-blue-700 text-white shadow-lg shadow-black/50 dark:from-[#1d1d1d] dark:to-[#474747] dark:shadow-black md:h-[320px] md:w-[550px]">
-      <h2 className="absolute right-12 top-2 flex items-center gap-1 text-[1rem] font-[600] text-white md:right-16 md:text-lg">
-        {index === undefined && currentData.time}
-      </h2>
+      {!index && <Time timeZone={timeZone} />}
 
       <img
-        className={`hover-scale absolute h-[12em] w-[12em] rounded-xl md:-top-14 md:left-[2%] md:size-[14rem] ${imageName === "Clear" ? "-left-[3%] -top-[22%]" : "left-[1%] top-[-28%]"}`}
+        className={`hover-scale absolute rounded-xl md:-top-14 md:left-[2%] ${imageName === "Clear" ? "-left-[3%] -top-[22%] size-[11.7rem] md:size-[13rem]" : "left-[-2%] top-[-24%] size-[12rem] md:size-[14rem]"}`}
         src={`/${imageName}.png`}
         alt=""
       />
-      <div className="absolute right-[7%] top-[12%] flex flex-col items-center justify-center font-oswald text-[3.31em] md:top-12 md:gap-3 md:text-7xl">
-        <h1 className="font-extrabold">{temperature}°C</h1>
+      <div
+        className={`${index === undefined ? "right-[8%] top-[12%] text-[3.5em] md:text-7xl" : "right-[10%] top-[5%] text-[3.8em] md:top-[2%] md:text-[4.7rem]"} absolute flex flex-col items-center justify-center font-oswald md:top-12 md:gap-3`}
+      >
+        <h1 className="bg-gradient-to-b from-white via-white to-white/30 bg-clip-text font-extrabold text-transparent dark:to-transparent">
+          {temperature}°C
+        </h1>
 
         <h2 className="ml-3 flex w-full items-center gap-1 font-oxanium text-base font-[500] md:text-xl">
           Feels like
@@ -42,7 +43,7 @@ const PreviewCard = ({ index }) => {
         </h2>
       </div>
       {/* Description & Day */}
-      <div className="absolute left-[8%] top-[42%] flex h-3 w-[55%] flex-col gap-2 text-[1.3em] font-[600] capitalize leading-5 md:top-[45%] md:gap-5 md:text-[1.7rem]">
+      <div className="absolute left-[8%] top-[45%] flex h-3 w-[55%] flex-col gap-2 text-[1.3em] font-[600] capitalize leading-5 md:top-[45%] md:gap-3 md:text-[1.7rem]">
         <h2 className="flex flex-wrap italic">{description}</h2>
         <h2 className="text-base md:text-lg">{dayName}</h2>
       </div>
@@ -55,3 +56,13 @@ const PreviewCard = ({ index }) => {
 };
 
 export default memo(PreviewCard);
+
+const Time = memo(({ timeZone }) => {
+  const time = useTime(timeZone);
+
+  return (
+    <h2 className="absolute right-12 top-2 flex items-center gap-1 text-[1rem] font-[600] text-white md:right-20 md:text-lg">
+      {time}
+    </h2>
+  );
+});

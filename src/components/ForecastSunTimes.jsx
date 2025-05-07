@@ -1,8 +1,8 @@
 import React, { memo, useState } from "react";
 import { GiSunrise, GiSunset } from "react-icons/gi";
-import { useApiData } from "../Context/ApiContext";
-import { useSidebar } from "../Context/SidebarContext";
-import ForecastSunTimesSkeleton from "./Skeletons/ForecastSunTimesSkeleton";
+import { useApiData } from "../context/ApiContext";
+import { useSidebar } from "../context/SidebarContext";
+import ForecastSunTimesSkeleton from "./skeletons/ForecastSunTimesSkeleton";
 
 const ForecastSunTimes = ({ index }) => {
   const { isLoading, getDailyData } = useApiData();
@@ -21,7 +21,7 @@ const ForecastSunTimes = ({ index }) => {
     >
       {/* Animated Underline */}
       <div
-        className={`${!activeTab ? "translate-x-[80%]" : "right-[50%]"} absolute bottom-0 h-full w-[60%] -skew-x-12 rounded-lg bg-black/10 from-blue-100 to-blue-400 transition-all duration-200 ease-in-out dark:border-t dark:border-white/50 dark:bg-white/5 md:bg-gradient-to-b md:dark:bg-none`}
+        className={`${!activeTab ? "translate-x-[80%]" : "right-[50%]"} absolute bottom-0 h-full w-[60%] -skew-x-12 rounded-lg bg-black/10 transition-all duration-200 ease-in-out dark:border-t dark:border-white/50 dark:bg-white/5 md:bg-gradient-to-b md:dark:bg-none`}
       ></div>
 
       {/* Sunrise*/}
@@ -38,7 +38,7 @@ const ForecastSunTimes = ({ index }) => {
       {/* Sunset*/}
       <div className="z-10 flex h-full w-[45%] cursor-pointer flex-col justify-center gap-3 pl-4 pt-[1%]">
         <h1 className="w-full rounded-md text-sm font-[600] italic md:text-lg">
-          Sunrise
+          Sunset
         </h1>
         <span className="relative bottom-2 right-2 flex w-full items-center justify-center gap-2 font-[600] dark:from-white dark:via-white/80 md:text-[1.4rem]">
           {sunSet}

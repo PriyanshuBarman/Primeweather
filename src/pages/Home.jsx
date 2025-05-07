@@ -2,17 +2,17 @@ import React, { lazy, Suspense } from "react";
 import { AiOutlineDoubleRight } from "react-icons/ai";
 import { useMediaQuery } from "react-responsive";
 import { NavLink } from "react-router-dom";
-import Navbar from "./Navbar";
-import PreviewCard from "./PreviewCard";
-import Sidebar from "./Sidebar";
-import DailyForecastSkeleton from "./Skeletons/DailyForecastSkeleton";
-import HighlightsSkeleton from "./Skeletons/HighlightsSkeleton";
-import HourlyForecastSkeleton from "./Skeletons/HourlyForecastSkeleton";
-import SunriseSunset from "./SunriseSunset";
+import Navbar from "../layouts/Navbar";
+import PreviewCard from "../components/PreviewCard";
+import DailyForecastSkeleton from "../components/skeletons/DailyForecastSkeleton";
+import HourlyForecastSkeleton from "../components/skeletons/HourlyForecastSkeleton";
+import WeatherHighlightsSkeleton from "../components/skeletons/WeatherHighlightsSkeleton";
+import SunriseSunset from "../components/SunriseSunset";
+import Sidebar from "../layouts/Sidebar";
 
-const DailyForecast = lazy(() => import("./DailyForecast"));
-const HourlyForecast = lazy(() => import("./HourlyForecast"));
-const Highlights = lazy(() => import("./Highlights"));
+const DailyForecast = lazy(() => import("../components/DailyForecast"));
+const HourlyForecast = lazy(() => import("../components/HourlyForecast"));
+const WeatherHighlights = lazy(() => import("../components/WeatherHighlights"));
 const Home = () => {
   const isDeskTop = useMediaQuery({ minWidth: 768 });
   return (
@@ -29,10 +29,10 @@ const Home = () => {
             </div>
           </Suspense>
         </div>
-        <div className="hover-scale-2 flex h-full flex-col items-center pb-5 dark:bg-transparent md:mt-6 md:flex md:w-[29%] md:flex-col md:items-center md:rounded-3xl md:bg-white md:shadow-md">
-          <div className="rounded-3xl md:dark:bg-[#1c1c1c] md:dark:pb-4 md:dark:shadow-md md:dark:shadow-black">
-            <Suspense fallback={<HighlightsSkeleton />}>
-              <Highlights />
+        <div className="hover-scale-2 flex h-full flex-col items-center dark:bg-transparent max-sm:min-w-full md:mt-6 md:flex md:w-[29%] md:flex-col md:items-center md:rounded-3xl md:bg-white md:pb-5 md:shadow-md">
+          <div className="rounded-3xl max-sm:w-full md:dark:bg-[#1c1c1c] md:dark:pb-4 md:dark:shadow-md md:dark:shadow-black">
+            <Suspense fallback={<WeatherHighlightsSkeleton />}>
+              <WeatherHighlights />
             </Suspense>
           </div>
           <SunriseSunset />
@@ -45,7 +45,7 @@ const Home = () => {
       {!isDeskTop && (
         <NavLink
           to={"/forecast/hourly"}
-          className="m-auto mt-10 flex h-9 w-52 items-center justify-center gap-3 rounded-full bg-gradient-to-br from-blue-300 to-blue-600 text-sm font-[500] italic text-white shadow-md shadow-black/30 dark:bg-blue-600 dark:shadow-black"
+          className="m-auto mt-10 flex h-9 w-52 items-center justify-center gap-3 rounded-full bg-gradient-to-br from-blue-300 to-blue-600 text-sm font-[500] italic text-white shadow shadow-black/30 dark:bg-blue-600 dark:shadow-black"
         >
           Hourly Forecast
           <AiOutlineDoubleRight size={15} />

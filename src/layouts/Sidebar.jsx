@@ -6,10 +6,10 @@ import { RxCross1 } from "react-icons/rx";
 import { TbHomeFilled } from "react-icons/tb";
 import { TiChartLine } from "react-icons/ti";
 import { NavLink } from "react-router-dom";
-import { useSearch } from "../Context/SearchContext";
-import { useSidebar } from "../Context/SidebarContext";
-import { useTheme } from "../Context/ThemeContext";
-import Socials from "./Socials";
+import { useSearch } from "../context/SearchContext";
+import { useSidebar } from "../context/SidebarContext";
+import { useTheme } from "../context/ThemeContext";
+import Socials from "../components/Socials";
 
 const Sidebar = () => {
   const { openSearchPage } = useSearch();

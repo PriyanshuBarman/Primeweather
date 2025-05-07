@@ -1,6 +1,6 @@
 import React, { memo } from "react";
-import { useApiData } from "../Context/ApiContext";
-import WeatherCardSkeleton from "./Skeletons/WeatherCardSkeleton";
+import { useApiData } from "../context/ApiContext";
+import WeatherCardSkeleton from "./skeletons/WeatherCardSkeleton";
 
 const WeatherCard = () => {
   const { currentData, isLoading } = useApiData();

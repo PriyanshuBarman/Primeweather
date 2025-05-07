@@ -5,12 +5,14 @@ import { MdCloseFullscreen, MdWidgets } from "react-icons/md";
 import { TbHomeFilled } from "react-icons/tb";
 import { TiChartLine } from "react-icons/ti";
 import { NavLink } from "react-router-dom";
-import { useSidebar } from "../Context/SidebarContext";
-import { useTheme } from "../Context/ThemeContext";
+import { useSearch } from "../context/SearchContext";
+import { useSidebar } from "../context/SidebarContext";
+import { useTheme } from "../context/ThemeContext";
 
 const DeskTopSidebar = () => {
   const { toggleWidget, hiddenWidgets } = useSidebar();
   const { currentTheme, toggleTheme } = useTheme();
+  const { searchBarRef } = useSearch();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isWidgetTabOpen, setIsWidgetTabOpen] = useState(false);
   const [showWidgetPopup, setShowWidgetPopup] = useState(false);
@@ -34,7 +36,7 @@ const DeskTopSidebar = () => {
     <div className="flex">
       {/* Sidebar */}
       <aside
-        className={`fixed left-0 top-0 z-40 h-full pt-16 shadow-sm shadow-black/30 transition-all duration-200 ${
+        className={`fixed left-0 top-0 z-30 h-full pt-16 shadow-sm shadow-black/30 transition-all duration-200 ${
           isSidebarOpen ? "w-80" : "w-16"
         } bg-white text-black dark:bg-[#272626] dark:text-white`}
       >
@@ -86,7 +88,10 @@ const DeskTopSidebar = () => {
           </li>
 
           {/* Search */}
-          <li className="group relative flex">
+          <li
+            onClick={() => searchBarRef?.current?.focus()}
+            className="group relative flex"
+          >
             <div className="flex min-w-full cursor-pointer items-center justify-start py-2 pl-4 hover:bg-gray-200 dark:hover:bg-white/10">
               <IoMdSearch size={30} />
               <span
@@ -229,7 +234,7 @@ const DeskTopSidebar = () => {
             </div>
             {!isSidebarOpen && (
               <span className="absolute left-20 top-0 -translate-x-14 scale-0 whitespace-nowrap rounded-md bg-white px-3.5 py-1.5 font-[600] italic text-black opacity-0 transition-all duration-300 group-hover:-translate-x-0 group-hover:scale-100 group-hover:opacity-100">
-                Dark Mode
+                {currentTheme === "dark" ? "Light Mode" : "Dark Mode"}
               </span>
             )}
           </li>

@@ -4,9 +4,9 @@ import { FaEye } from "react-icons/fa";
 import { PiWindBold } from "react-icons/pi";
 import { SiRainmeter } from "react-icons/si";
 import { WiRainMix } from "react-icons/wi";
-import { useApiData } from "../Context/ApiContext";
+import { useApiData } from "../context/ApiContext";
 import useLocalStorage from "../hooks/useLocalStorage";
-import WeatherStatsSkeleton from "./Skeletons/WeatherStatsSkeleton";
+import WeatherStatsSkeleton from "./skeletons/WeatherStatsSkeleton";
 
 const WeatherStats = ({ index }) => {
   const { currentData, isLoading, getDailyData } = useApiData();

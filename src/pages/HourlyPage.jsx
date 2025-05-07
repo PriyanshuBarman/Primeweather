@@ -7,9 +7,9 @@ import { MdLocationOn } from "react-icons/md";
 import { SiRainmeter } from "react-icons/si";
 import { WiRaindrops, WiRainMix } from "react-icons/wi";
 import { useMediaQuery } from "react-responsive";
-import { useApiData } from "../Context/ApiContext";
-import PageHeader from "./PageHeader";
-import HourlyCardSkeleton from "./Skeletons/HourlyCardSkeleton";
+import { useApiData } from "../context/ApiContext";
+import HourlyCardSkeleton from "../components/skeletons/HourlyCardSkeleton";
+import PageHeader from "../components/PageHeader";
 
 const HourlyPage = () => {
   const { hourlyData, city } = useApiData();
@@ -134,7 +134,7 @@ const HourlyCard = memo(({ index }) => {
         </h2>
         <div className="relative flex h-full flex-col items-center justify-center">
           <h2 className="text-xl font-semibold md:text-2xl">{temperature}°c</h2>
-          {precipitationProbability > 20 ? (
+          {precipitationProbability > 10 ? (
             <h5 className="precipitation relative left-1 top-1 text-sm font-[500] md:text-lg">
               {precipitationProbability}%
               <WiRaindrops className="absolute -left-10 -top-4 size-14 fill-blue-600 md:-left-12 md:size-16 md:fill-blue-500" />
@@ -150,12 +150,12 @@ const HourlyCard = memo(({ index }) => {
       <div
         className={`${
           isExpanded ? "h-36 opacity-100 md:h-40" : "h-0"
-        } m-auto flex w-full flex-wrap justify-around overflow-hidden transition-all duration-200 md:w-[92%] md:justify-evenly`}
+        } m-auto flex w-full flex-wrap justify-around overflow-hidden transition-all duration-100 md:w-[92%] md:justify-evenly`}
       >
         {stats.map((stat) => (
           <div
             key={stat.label}
-            className={`flex h-[3rem] w-24 flex-col items-center justify-center gap-1 rounded-xl bg-black/5 shadow transition-all delay-200 duration-200 ease-in-out dark:bg-white/5 md:h-16 md:w-32 ${isExpanded ? "scale-100 opacity-100" : "scale-0 opacity-0"}`}
+            className={`flex h-[3rem] w-24 flex-col items-center justify-center gap-1 rounded-xl bg-black/5 shadow transition-all delay-100 duration-100 ease-in-out dark:bg-white/5 md:h-16 md:w-32 ${isExpanded ? "scale-100 opacity-100" : "scale-50 opacity-0"}`}
           >
             <span className="flex w-full items-center justify-center gap-1 font-[500]">
               {stat.icon}

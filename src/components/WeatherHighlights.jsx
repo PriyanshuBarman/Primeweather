@@ -4,13 +4,14 @@ import { CiLocationArrow1 } from "react-icons/ci";
 import { IoTimer } from "react-icons/io5";
 import { SiRainmeter } from "react-icons/si";
 import { WiRainMix } from "react-icons/wi";
-import { useApiData } from "../Context/ApiContext";
-import { useSidebar } from "../Context/SidebarContext";
+import { useApiData } from "../context/ApiContext";
+import { useSidebar } from "../context/SidebarContext";
 import Widget from "./Widget";
 
-const Highlights = ({ index }) => {
-  const { hiddenWidgets } = useSidebar();
+const WeatherHighlights = ({ index }) => {
+  const { hiddenWidgets, isAllWidgetsHidden } = useSidebar();
   const { currentData, isLoading, getDailyData } = useApiData();
+  if (isAllWidgetsHidden) return;
 
   const data = index !== undefined ? getDailyData(index) : currentData;
 
@@ -49,7 +50,7 @@ const Highlights = ({ index }) => {
       name: "humidity",
       data: humidity,
       unit: "%",
-      icon: <SiRainmeter className="h-14 w-12" />,
+      icon: <SiRainmeter className="h-12 w-10" />,
     },
     {
       isHidden: hiddenWidgets.clouds,
@@ -81,17 +82,18 @@ const Highlights = ({ index }) => {
       name: "windDirection",
       icon: (
         <CiLocationArrow1
-          className="mb-2 mr-9 h-full w-[4rem] text-black/70 dark:text-white/80"
+          className="myArrow mb-2 mr-9 h-full w-[3.5rem] text-black/60 dark:text-white/70"
           style={{
-            transform: `rotate(${windDirection}deg)`,
+            transform: `rotate(${-(windDirection-45) }deg)`,
           }}
         />
       ),
     },
   ];
 
+
   return (
-    <section className="highlights-container relative mb-2 flex w-full flex-col items-center justify-center">
+    <section className="WeatherHighlights-container relative mb-2 flex w-full flex-col items-center justify-center">
       {isLoading ? (
         <div className="heading-skeleton inline-flex h-8 w-[94%] animate-pulse items-center justify-center rounded-full bg-black/5 shadow-md dark:bg-white/10 dark:shadow-black/80 md:mt-3 md:h-7 md:bg-transparent md:shadow-none md:dark:bg-transparent">
           <div className="flex h-full flex-col items-start justify-center gap-1">
@@ -101,8 +103,8 @@ const Highlights = ({ index }) => {
         </div>
       ) : (
         <>
-          <h1 className="hover-scale flex h-8 w-[95%] items-center justify-center rounded-full bg-black/5 text-[.9rem] font-[500] italic shadow-md dark:bg-white/10 dark:shadow-black md:mt-3 md:h-7 md:w-full md:bg-transparent md:text-lg md:font-[500] md:shadow-none md:dark:bg-transparent">
-            Weather Highlights
+          <h1 className="hover-scale flex h-8 w-[95%] items-center justify-center rounded-full bg-black/5 text-[.9rem] font-[500] italic shadow-md dark:bg-white/10 dark:shadow-black md:mt-3 md:h-7 md:min-w-full md:bg-transparent md:text-lg md:font-[500] md:shadow-none md:dark:bg-transparent">
+            Weather WeatherHighlights
           </h1>
         </>
       )}
@@ -125,4 +127,4 @@ const Highlights = ({ index }) => {
   );
 };
 
-export default memo(Highlights);
+export default memo(WeatherHighlights);

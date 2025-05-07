@@ -18,6 +18,7 @@ export const SidebarProvider = ({ children }) => {
     windDirection: false,
     sunriseSunset: false,
   });
+  const isAllWidgetsHidden = Object.values(hiddenWidgets).every(v => v);
 
   const toggleWidget = (widgetName) => {
     setHiddenWidgets((prevState) => ({
@@ -30,6 +31,7 @@ export const SidebarProvider = ({ children }) => {
     <SidebarContext.Provider
       value={{
         hiddenWidgets,
+        isAllWidgetsHidden,
         toggleWidget,
         setisDailyForecastHidden,
         isDailyForecastHidden,

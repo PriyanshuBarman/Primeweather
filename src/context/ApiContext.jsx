@@ -7,13 +7,16 @@ import React, {
 } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 import {
-  getDayName,
-  getDayOrNight,
   getImageName,
-  getTime,
   getUvHealthConcern,
   weatherDescription,
 } from "../utils/helper";
+import {
+  isDaytime,
+  getLongDayName,
+  getShortDayName,
+  getTime,
+} from "../utils/timeConverter";
 
 const ApiContext = createContext();
 
@@ -34,8 +37,8 @@ export const ApiProvider = ({ children }) => {
   });
 
   const search = async (input1, input2 = null) => {
-    const API_KEY1 = import.meta.env.VITE_API_KEY1;
-    const API_KEY2 = import.meta.env.VITE_API_KEY2;
+    const API_KEY1 = import.meta.env.VITE_API_KEY4;
+    const API_KEY2 = import.meta.env.VITE_API_KEY4;
     const GEO_API_KEY = import.meta.env.VITE_GEO_API_KEY;
 
     setIsLoading(true);
@@ -66,11 +69,10 @@ export const ApiProvider = ({ children }) => {
           fetch(geoAPI),
         ]);
 
-      if (!weatherResponse.ok) {
-        throw new Error(weatherResponse.status);
-      }
+      if (!weatherResponse.ok) throw new Error(weatherResponse.status);
 
       const weatherData = await weatherResponse.json();
+
       const forecast = await forecastResponse.json();
       const geoData = await geoapiResponse.json();
 
@@ -117,19 +119,20 @@ export const ApiProvider = ({ children }) => {
   }
 
   const currentData = useMemo(() => {
-    const isDayTime = getDayOrNight(currentTime, sunRiseTime, sunSetTime);
+    const isDayTime = isDaytime(currentTime, sunRiseTime, sunSetTime);
     const description =
       weatherDescription[weatherData?.data.values.weatherCode];
 
     return {
-      dayName: getDayName(weatherData?.data.time, timeZone),
+      dayName: getLongDayName(weatherData?.data.time, timeZone),
+      shortDayName: getShortDayName(weatherData?.data.time, timeZone),
       time: currentTime,
       temperature: Math.round(weatherData?.data.values.temperature),
       maxTemp: Math.round(
-        forecastData?.timelines.daily[0].values.temperatureMax,
+        forecastData?.timelines?.daily[0].values.temperatureMax,
       ),
       minTemp: Math.round(
-        forecastData?.timelines.daily[0].values.temperatureMin,
+        forecastData?.timelines?.daily[0].values.temperatureMin,
       ),
       feelsLike: Math.round(weatherData?.data.values.temperatureApparent),
       uvIndex: weatherData?.data.values.uvIndex,
@@ -158,7 +161,7 @@ export const ApiProvider = ({ children }) => {
     const description =
       weatherDescription[dailyData[index]?.values.weatherCodeMax];
     return {
-      dayName: getDayName(dailyData[index]?.time, timeZone),
+      dayName: getLongDayName(dailyData[index]?.time, timeZone),
       temperature: Math.round(dailyData[index]?.values.temperatureAvg),
       maxTemp: Math.round(dailyData[index]?.values.temperatureMax),
       minTemp: Math.round(dailyData[index]?.values.temperatureMin),
@@ -182,13 +185,13 @@ export const ApiProvider = ({ children }) => {
     };
   };
   const getHourlyData = (index) => {
-    const day = getDayName(hourlyData[index]?.time, timeZone);
+    const day = getShortDayName(hourlyData[index]?.time, timeZone);
     const time = getTime(hourlyData[index]?.time, timeZone);
-    const isDayTime = getDayOrNight(time, sunRiseTime, sunSetTime);
+    const isDayTime = isDaytime(time, sunRiseTime, sunSetTime);
     const description =
       weatherDescription[hourlyData[index]?.values.weatherCode];
     return {
-      dayName: currentData?.dayName === day ? "" : day,
+      dayName: currentData?.shortDayName === day ? "" : day,
       time: time,
       temperature: Math.round(hourlyData[index]?.values.temperature),
       feelsLike: Math.round(hourlyData[index]?.values.temperatureApparent),

@@ -2,7 +2,7 @@ import { IoMdSearch } from "react-icons/io";
 import { TbHomeFilled } from "react-icons/tb";
 import { TiChartLine } from "react-icons/ti";
 import { NavLink } from "react-router-dom";
-import { useSearch } from "../Context/SearchContext";
+import { useSearch } from "../context/SearchContext";
 
 const BottomNavbar = () => {
   const { openSearchPage } = useSearch();
@@ -10,14 +10,17 @@ const BottomNavbar = () => {
     <nav className="fixed bottom-3 left-1/2 z-10 flex h-[2.8rem] w-[88%] -translate-x-1/2 items-stretch justify-around rounded-3xl border-black/30 bg-white px-1 font-oxanium shadow-[_2px_3px_5px_0px] shadow-black/40 dark:border-white/20 dark:bg-[#1d1d1d] dark:shadow-black">
       <HomeTab />
 
-      <div className="searchbar flex h-full w-[33%] items-center justify-center">
+      <NavLink
+        to="/search"
+        className="DesktopSearch flex h-full w-[33%] items-center justify-center"
+      >
         <div
           onClick={openSearchPage}
           className="Search flex h-[80%] w-full cursor-pointer items-center justify-center rounded-full bg-blue-500 text-white shadow-md shadow-black/40 transition-all ease-linear dark:bg-white/15"
         >
           <IoMdSearch className="size-[90%] transition-all duration-300 ease-linear hover:rotate-45" />
         </div>
-      </div>
+      </NavLink>
 
       <ForecastTab />
     </nav>

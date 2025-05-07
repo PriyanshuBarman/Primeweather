@@ -3,13 +3,13 @@ import { useMediaQuery } from "react-responsive";
 import { useParams } from "react-router-dom";
 import { FreeMode } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useApiData } from "../Context/ApiContext";
-import ForecastSunTimes from "./ForecastSunTimes";
-import Highlights from "./Highlights";
-import PageHeader from "./PageHeader";
-import PreviewCard from "./PreviewCard";
-import MadeWithLove from "./Skeletons/MadeWithLove";
-import ForecastSkeleton from "./Skeletons/ForecastSkeleton";
+import { useApiData } from "../context/ApiContext";
+import ForecastSunTimes from "../components/ForecastSunTimes";
+import WeatherHighlights from "../components/WeatherHighlights";
+import PageHeader from "../components/PageHeader";
+import PreviewCard from "../components/PreviewCard";
+import MadeWithLove from "../components/skeletons/MadeWithLove";
+import ForecastSkeleton from "../components/skeletons/ForecastSkeleton";
 
 const Forecast = () => {
   const { getDailyData, dailyData, isLoading } = useApiData();
@@ -79,29 +79,32 @@ const Forecast = () => {
           </Swiper>
         </div>
 
-        <div className="w-full space-y-10 md:flex md:flex-row md:items-center md:justify-around md:pb-5">
-          <div className="w-full md:h-full md:w-auto md:space-y-7">
+        <div className="mt-2 w-full space-y-10 md:flex md:flex-row md:items-center md:justify-around md:pb-5">
+          <div className="w-full md:h-full md:w-auto md:space-y-10">
             <PreviewCard index={activeIndex} />
             {isDeskTop && <ForecastSunTimes index={activeIndex} />}
           </div>
           <div className="hover-scale-2 rounded-3xl md:h-[97%] md:w-[40%] md:bg-white md:pt-2 md:shadow-md md:dark:bg-[#1c1c1c] md:dark:shadow-md md:dark:shadow-black">
-            <Highlights index={activeIndex} />
+            <WeatherHighlights index={activeIndex} />
           </div>
         </div>
         {!isDeskTop && <ForecastSunTimes index={activeIndex} />}
       </div>
 
       {isDeskTop ? (
-        <div className="relative flex h-full w-[23%] bg-gradient-to-b from-transparent to-blue-500 dark:to-white/70">
-          <div className="relative z-0 m-auto flex h-[50%] w-full flex-col items-center gap-10">
+        <div className="relative flex h-full w-[23%] items-center">
+          <h2 className="absolute top-[17%] w-full text-center text-2xl font-semibold text-black/80 dark:text-white/90">
+            Select Day
+          </h2>
+          <div className="relative mt-[80%] flex h-[70%] w-full flex-col items-center gap-14">
             {dailyData.map((_, idx) => (
               <h2
                 key={idx}
                 onClick={() => setActiveIndex(idx)}
-                className={`cursor-pointer text-center text-3xl font-[600] italic transition-all duration-300 ease-in-out ${
+                className={`cursor-pointer text-center text-2xl font-[600] italic transition-all duration-300 ease-in-out ${
                   idx === activeIndex
-                    ? "scale-[1.40] text-blue-600 dark:text-black"
-                    : "text-white hover:scale-[1.15] dark:text-black/60 hover:dark:text-black/75"
+                    ? "scale-[1.30] text-blue-600 dark:text-white"
+                    : "text-black/50 hover:scale-[1.15] dark:text-white/40 hover:dark:text-white"
                 }`}
               >
                 {getDailyData(idx).dayName}
