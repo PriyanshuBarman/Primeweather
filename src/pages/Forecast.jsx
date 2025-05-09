@@ -24,7 +24,7 @@ const Forecast = () => {
   const isDeskTop = useMediaQuery({ minWidth: 768 });
   if (isLoading) return <ForecastSkeleton />;
   return (
-    <div className="w-full bg-[#fafafa] pb-10 dark:bg-[#1d1d1d] md:flex md:h-full md:justify-between md:gap-5 md:pb-0 md:pl-28">
+    <div className="w-full bg-[#fafafa] pb-14 dark:bg-[#1d1d1d] md:flex md:h-full md:justify-between md:gap-5 md:pb-0 md:pl-28">
       <div className="container flex h-full w-full flex-col items-center justify-center gap-y-5 overflow-hidden pt-10 font-oxanium dark:text-white md:w-[75%]">
         {isDeskTop ? (
           <h1 className="absolute top-16 w-full text-center text-xl font-[500] italic leading-3">
@@ -50,6 +50,7 @@ const Forecast = () => {
                 <>
                   <SwiperSlide key={dayName}>
                     <div
+                      key={idx}
                       onClick={() => handleCardClick(idx)}
                       className={`relative flex h-[6.5rem] w-[3.9rem] cursor-pointer justify-center overflow-hidden rounded-[1.7em] shadow-[1.5px_1px_2px_0px] shadow-black/40 dark:shadow-black md:h-[5.4rem] md:w-44 ${
                         idx === activeIndex

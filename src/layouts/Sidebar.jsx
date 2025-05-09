@@ -1,32 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { IoIosArrowDown, IoMdMoon, IoMdSearch } from "react-icons/io";
 import { MdWidgets } from "react-icons/md";
 import { RxCross1 } from "react-icons/rx";
 import { TbHomeFilled } from "react-icons/tb";
 import { TiChartLine } from "react-icons/ti";
-import { NavLink } from "react-router-dom";
-import { useSearch } from "../context/SearchContext";
+import { NavLink, useNavigate } from "react-router-dom";
+import Socials from "../components/Socials";
 import { useSidebar } from "../context/SidebarContext";
 import { useTheme } from "../context/ThemeContext";
-import Socials from "../components/Socials";
 
 const Sidebar = () => {
-  const { openSearchPage } = useSearch();
   const {
     toggleWidget,
     hiddenWidgets,
     isDailyForecastHidden,
     setisDailyForecastHidden,
   } = useSidebar();
-
   const { currentTheme, toggleTheme } = useTheme();
   const [isWidgetTabOpen, setIsWidgetTabOpen] = useState(false);
-
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
   const toggleSidebar = () => setIsSidebarOpen((prevState) => !prevState);
-
+  const navigate = useNavigate();
   const widgetList = [
     "uvIndex",
     "humidity",
@@ -37,11 +32,23 @@ const Sidebar = () => {
     "sunriseSunset",
   ];
 
+  useEffect(() => {
+    if (isSidebarOpen) {
+      document.body.classList.add("overflow-hidden");
+    } else {
+      document.body.classList.remove("overflow-hidden");
+    }
+
+    return () => {
+      document.body.classList.remove("overflow-hidden");
+    };
+  }, [isSidebarOpen]);
+  
   return (
     <>
       <button
         onClick={toggleSidebar}
-        className="toggle-btn fixed left-2 top-2 z-30 h-7 w-10 overflow-hidden rounded-md bg-white p-0.5 text-black shadow-md shadow-black/30 dark:bg-[#484848] dark:text-white"
+        className="toggle-btn fixed left-2 top-2 z-50 h-7 w-10 overflow-hidden rounded-md bg-white p-0.5 text-black shadow-md shadow-black/30 dark:bg-[#484848] dark:text-white"
       >
         <RxCross1
           className={`absolute left-1/2 top-1/2 size-[70%] -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ease-in-out ${isSidebarOpen ? "visible opacity-100" : "invisible -translate-y-12 opacity-0"}`}
@@ -54,7 +61,7 @@ const Sidebar = () => {
 
       <div
         onClick={toggleSidebar}
-        className={`fixed inset-0 left-0 z-20 h-screen w-full bg-black/80 text-base transition-opacity md:w-full ${
+        className={`fixed inset-0 left-0 z-40 h-screen w-full bg-black/80 text-base transition-opacity md:w-full ${
           isSidebarOpen ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
@@ -88,8 +95,8 @@ const Sidebar = () => {
             <li
               className={`flex cursor-pointer items-center gap-2 hover:bg-gray-200 dark:hover:bg-gray-700`}
               onClick={() => {
+                navigate("/search");
                 toggleSidebar();
-                openSearchPage();
               }}
             >
               <IoMdSearch className="mr-2 size-8 fill-black dark:fill-white" />{" "}

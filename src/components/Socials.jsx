@@ -2,9 +2,9 @@ import React from "react";
 import {
   FaGithub,
   FaLinkedinIn,
-  FaTelegramPlane,
-  FaTwitter,
+  FaTelegramPlane
 } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Socials = () => {
   const socialLinks = [
@@ -26,10 +26,9 @@ const Socials = () => {
       url: "https://t.me/PriyanshuWB",
       color: "#2CA5E0",
     },
-
     {
       name: "Twitter",
-      icon: <FaTwitter />,
+      icon: <FaXTwitter />,
       url: "https://x.com/Priyanshuwb",
       color: "#1DA1F2",
     },

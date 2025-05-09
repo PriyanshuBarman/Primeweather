@@ -2,8 +2,10 @@ import { MdMyLocation } from "react-icons/md";
 import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useApiData } from "../../context/ApiContext";
 
-const GeoLocationBtn = ({ search, closeAll }) => {
+const GeoLocationBtn = ({ closeAll }) => {
+  const {search} = useApiData();
   const isDeskTop = useMediaQuery({ minWidth: 768 });
   const navigate = useNavigate();
 
@@ -37,9 +39,9 @@ const GeoLocationBtn = ({ search, closeAll }) => {
       type="button"
       onClick={handleClick}
       aria-label="Use current location"
-      className="flex items-center justify-center rounded-full bg-black/80 p-2 text-white shadow-md dark:bg-white/15 dark:text-white/70"
+      className="flex items-center justify-center rounded-full bg-black/80 p-2 text-white shadow-md dark:shadow-black/50 dark:bg-white/15 dark:text-white"
     >
-      <MdMyLocation className="size-4" />
+      <MdMyLocation size={20} className="min-w-4 min-h-4" />
     </button>
   );
 };

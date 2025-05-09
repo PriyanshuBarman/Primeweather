@@ -7,13 +7,12 @@ import { MdLocationOn } from "react-icons/md";
 import { SiRainmeter } from "react-icons/si";
 import { WiRaindrops, WiRainMix } from "react-icons/wi";
 import { useMediaQuery } from "react-responsive";
-import { useApiData } from "../context/ApiContext";
-import HourlyCardSkeleton from "../components/skeletons/HourlyCardSkeleton";
 import PageHeader from "../components/PageHeader";
+import HourlyCardSkeleton from "../components/skeletons/HourlyCardSkeleton";
+import { useApiData } from "../context/ApiContext";
 
 const HourlyPage = () => {
   const { hourlyData, city } = useApiData();
-
   const isDeskTop = useMediaQuery({ minWidth: 768 });
 
   return (
@@ -21,7 +20,7 @@ const HourlyPage = () => {
       <PageHeader name={"Hourly Forecast"} />
 
       <div className="hourly-cards m-auto w-full items-center justify-center space-y-6 pt-3 md:w-[40%]">
-        <h2 className="sticky top-0 z-10 mt-7 flex h-10 w-full justify-center px-9 pb-2 pt-2 text-center font-semibold italic backdrop-blur-xl md:top-12 md:text-xl">
+        <h2 className="sticky top-0 z-40 mt-7 flex h-10 w-full justify-center px-9 pb-2 pt-2 text-center font-semibold italic backdrop-blur-xl md:top-12 md:text-xl">
           {isDeskTop ? (
             "Hourly Forecast"
           ) : (
@@ -115,7 +114,7 @@ const HourlyCard = memo(({ index }) => {
   return (
     <div
       onClick={toggleExpand}
-      className={`relative m-auto flex w-[94%] cursor-pointer flex-col rounded-xl rounded-br-none border-l border-t border-black/15 bg-white shadow-md shadow-black/10 dark:border-white/5 dark:bg-[#1d1d1d] dark:text-white/90 dark:shadow-black md:pb-3`}
+      className={`relative m-auto flex w-[94%] cursor-pointer flex-col rounded-xl rounded-br-none border-l border-t border-black/15 shadow-md shadow-black/10 dark:border-white/5 dark:bg-[#1d1d1d] dark:text-white/90 dark:shadow-black md:pb-3`}
     >
       <div className="relative flex h-[5rem] cursor-pointer items-center justify-around overflow-hidden rounded-xl">
         <h5 className="absolute left-0 top-0 flex justify-evenly whitespace-pre rounded-br-2xl bg-black/5 pl-4 pr-4 text-center text-[.67rem] font-[500] italic leading-4 shadow-sm shadow-black/30 dark:bg-white/5 dark:text-white/80 dark:shadow-black md:pr-8 md:text-sm">

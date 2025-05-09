@@ -86,16 +86,16 @@ meter {
 
 @media (max-width: 768px) {
   .Toastify__toast-container {
-    width: 70%; /* 50% width for smaller screens */
-    top: 20px;
-    right: 0; /* Align to the right on smaller screens */
+    width: 70% !important; /* 50% width for smaller screens */
+    top: 20px !important;
+    right: 0 !important; /* Align to the right on smaller screens */
     /* You might need to adjust or remove 'left' to avoid conflicts */
-    left: auto;
+    left: auto !important;
   }
   .Toastify__toast {
     min-height: auto !important; /* Try resetting any min-height */
     height: auto !important;
-    border-radius: 8px; /* Or whatever value you're using */
-    padding: 12px 12px;
+    border-radius: 8px !important; /* Or whatever value you're using */
+    padding: 12px 12px !important;
   }
 }

@@ -5,8 +5,8 @@ import HourlyPageSkeleton from "./components/skeletons/HourlyPageSkeleton";
 import Layout from "./layouts/Layout";
 import ErrPage from "./pages/ErrPage";
 import Home from "./pages/Home";
-import HourlyPage from "./pages/HourlyPage";
 import SearchPage from "./pages/SearchPage";
+const HourlyPage = lazy(() => import("./pages/HourlyPage"));
 const Forecast = lazy(() => import("./pages/Forecast"));
 
 export let routes = createBrowserRouter([

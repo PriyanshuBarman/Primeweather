@@ -8,7 +8,7 @@ const MadeWithLove = () => {
         Made With <FaHeart className="text-blue-500" />
       </span>
       <span className="font-dancingScript text-lg text-black/70 dark:text-white/65 md:flex md:text-base">
-        by <span className="font-bold">Priyanshu</span>
+        by <span className="ml-1 font-bold">Priyanshu</span>
       </span>
     </div>
   );

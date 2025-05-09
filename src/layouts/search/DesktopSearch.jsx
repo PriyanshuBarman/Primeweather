@@ -44,14 +44,15 @@ const DesktopSearch = () => {
   }, [setIsPopoverOpen]);
 
   const handleSubmit = useCallback(
-    (city) => {
-      const trimmedCity = city.trim();
+    (cityName = null) => {
+      const trimmedCity = cityName.trim();
       if (!trimmedCity || trimmedCity.length < 3)
         return toast.warning("Enter a valid city name");
       search(trimmedCity);
       closeAll();
       addToSearchHistory(trimmedCity);
     },
+
     [search, closeAll, addToSearchHistory],
   );
 
@@ -69,7 +70,7 @@ const DesktopSearch = () => {
   return (
     <>
       <div className="fixed right-[8%] z-50 flex gap-4">
-        <div className="DesktopSearch flex w-[450px] items-center gap-4 rounded-lg border bg-white pl-12 pr-4 focus-within:ring-1 focus-within:ring-black/50 dark:bg-[#363636] focus-within:dark:ring-white">
+        <div className="DesktopSearch flex w-[450px] items-center gap-4 rounded-lg border bg-white pl-12 pr-4 focus-within:ring-1 focus-within:ring-black/50 dark:bg-[#363636] focus-within:dark:bg-black">
           <CiSearch
             size={20}
             className="absolute left-4 text-black/80 dark:text-white/80"
@@ -96,9 +97,9 @@ const DesktopSearch = () => {
             {isLoading ? <Spinner /> : <IoMdClose />}
           </button>
         </div>
-        <GeoLocationBtn search={search} closeAll={closeAll} />
+        <GeoLocationBtn closeAll={closeAll} />
         {isPopoverOpen && (
-          <div className="absolute z-50 min-h-80 min-w-[450px] translate-y-9 rounded-lg bg-white p-4 shadow-lg dark:bg-black">
+          <div className="absolute z-50 max-h-[600px] min-h-80 min-w-[450px] translate-y-10 overflow-y-auto rounded-xl bg-white p-4 shadow-lg dark:bg-black">
             <Results {...{ searchResults, handleResultClick, selectedIndex }} />
             {!isLoading && !searchResults?.length && (
               <History

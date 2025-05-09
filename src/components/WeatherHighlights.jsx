@@ -84,13 +84,12 @@ const WeatherHighlights = ({ index }) => {
         <CiLocationArrow1
           className="myArrow mb-2 mr-9 h-full w-[3.5rem] text-black/60 dark:text-white/70"
           style={{
-            transform: `rotate(${-(windDirection-45) }deg)`,
+            transform: `rotate(${windDirection}deg)`,
           }}
         />
       ),
     },
   ];
-
 
   return (
     <section className="WeatherHighlights-container relative mb-2 flex w-full flex-col items-center justify-center">

@@ -36,7 +36,7 @@ const DeskTopSidebar = () => {
     <div className="flex">
       {/* Sidebar */}
       <aside
-        className={`fixed left-0 top-0 z-30 h-full pt-16 shadow-sm shadow-black/30 transition-all duration-200 ${
+        className={`fixed left-0 top-0 z-50 h-full pt-16 shadow-sm shadow-black/30 transition-all duration-200 ${
           isSidebarOpen ? "w-80" : "w-16"
         } bg-white text-black dark:bg-[#272626] dark:text-white`}
       >

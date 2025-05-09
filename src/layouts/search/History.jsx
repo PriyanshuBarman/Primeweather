@@ -12,7 +12,7 @@ function History({ handleSubmit, searchHistory, activeIdx, clearAllHistory }) {
             (!searchHistory?.length && " hidden")
           }
         >
-          Clear
+          Clear History
         </button>
       </div>
       {searchHistory?.map((item, idx) => (

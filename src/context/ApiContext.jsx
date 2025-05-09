@@ -37,8 +37,8 @@ export const ApiProvider = ({ children }) => {
   });
 
   const search = async (input1, input2 = null) => {
-    const API_KEY1 = import.meta.env.VITE_API_KEY4;
-    const API_KEY2 = import.meta.env.VITE_API_KEY4;
+    const API_KEY1 = import.meta.env.VITE_API_KEY1;
+    const API_KEY2 = import.meta.env.VITE_API_KEY2;
     const GEO_API_KEY = import.meta.env.VITE_GEO_API_KEY;
 
     setIsLoading(true);
@@ -101,6 +101,7 @@ export const ApiProvider = ({ children }) => {
       setIsLoading(false);
     }
   };
+
   useEffect(() => {
     if (lastSearch?.city) {
       search(lastSearch.city);
@@ -145,7 +146,7 @@ export const ApiProvider = ({ children }) => {
       clouds: Math.round(weatherData?.data.values.cloudCover),
       visibility: Math.round(weatherData?.data.values.visibility),
       windSpeed: Math.round(weatherData?.data.values.windSpeed * 3.6),
-      windDirection: weatherData?.data.values.windDirection,
+      windDirection: weatherData?.data.values.windDirection + (180 - 45),
       pressure: Math.round(weatherData?.data.values.pressureSurfaceLevel),
       rainIntensity: Math.round(weatherData?.data.values.rainIntensity),
       description: description,
@@ -172,7 +173,7 @@ export const ApiProvider = ({ children }) => {
       clouds: Math.round(dailyData[index]?.values.cloudCoverAvg),
       visibility: Math.round(dailyData[index]?.values.visibilityAvg),
       windSpeed: Math.round(dailyData[index]?.values.windSpeedAvg * 3.6),
-      windDirection: dailyData[index]?.values.windDirectionAvg + 180,
+      windDirection: dailyData[index]?.values.windDirectionAvg + (180 - 45),
       pressure: Math.round(dailyData[index]?.values.pressureSurfaceLevelAvg),
       rainIntensity: Math.round(dailyData[index]?.values.rainIntensityAvg),
       precipitationProbability: Math.round(
@@ -204,7 +205,7 @@ export const ApiProvider = ({ children }) => {
       clouds: Math.round(hourlyData[index]?.values.cloudCover),
       visibility: Math.round(hourlyData[index]?.values.visibility),
       windSpeed: Math.round(hourlyData[index]?.values.windSpeed * 3.6),
-      windDirection: hourlyData[index]?.values.windDirection,
+      windDirection: hourlyData[index]?.values.windDirection + (180 - 45),
       pressure: Math.round(hourlyData[index]?.values.pressureSurfaceLevel),
       rainIntensity: Math.round(hourlyData[index]?.values.rainIntensity),
       description: description,

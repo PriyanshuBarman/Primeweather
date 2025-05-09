@@ -26,7 +26,6 @@ const WeatherStats = ({ index }) => {
 
   const availableStats = [
     { label: "UV index", value: uvIndex, unit: uvHealthConcern },
-
     {
       label: "Visibility",
       value: visibility,
@@ -44,7 +43,6 @@ const WeatherStats = ({ index }) => {
         />
       ),
     },
-
     {
       label: "Rain Intensity",
       value: rainIntensity,
@@ -71,7 +69,6 @@ const WeatherStats = ({ index }) => {
     },
     { label: "Pressure", value: pressure, unit: "hPa" },
   ];
-
   // State for user-selected stats
   const [userStats, setUserStats] = useLocalStorage("weatherStats", [
     "Humidity",
@@ -97,6 +94,7 @@ const WeatherStats = ({ index }) => {
     });
     setActiveTooltip(null);
   };
+
   if (isLoading) return <WeatherStatsSkeleton />;
 
   return (
@@ -106,7 +104,7 @@ const WeatherStats = ({ index }) => {
         return (
           <div
             key={index}
-            className="tooltip-trigger hover-scale relative flex h-[67px] w-28 cursor-pointer flex-col items-center justify-center gap-1 rounded-2xl bg-white/10 shadow-md shadow-black/20 dark:bg-white/5 dark:shadow-black/40 md:h-20 md:w-44"
+            className="tooltip-trigger hover-scale relative flex min-h-[67px] w-28 cursor-pointer flex-col items-center justify-center gap-1 rounded-2xl bg-white/10 shadow-md shadow-black/20 dark:bg-white/5 dark:shadow-black/40 md:h-20 md:w-44"
             onClick={() =>
               setActiveTooltip(activeTooltip === index ? null : index)
             }
@@ -117,7 +115,7 @@ const WeatherStats = ({ index }) => {
               <span className="text-lg md:text-xl">{stats.value}</span>
               <span className="text-sm md:text-base">{stats.unit}</span>
             </span>
-            <h1 className="text-center text-xs font-[600] md:text-sm md:font-[500]">
+            <h1 className="px-2 text-center text-xs font-[600] leading-3 md:text-sm md:font-[500]">
               {stats.label}
             </h1>
 
@@ -130,15 +128,18 @@ const WeatherStats = ({ index }) => {
                 Replace with-
               </div>
 
-              {availableStats.map((item, itemIndex) => (
-                <div
-                  key={itemIndex}
-                  className="cursor-pointer p-1 text-sm italic hover:bg-gray-200 dark:hover:bg-gray-700"
-                  onClick={() => handleStatChange(index, item.label)}
-                >
-                  {item.label}
-                </div>
-              ))}
+              {/* Tooltip content */}
+              {availableStats
+                .filter((item) => !userStats.includes(item.label))
+                .map((item, itemIndex) => (
+                  <div
+                    key={itemIndex}
+                    className="cursor-pointer p-1 text-sm italic hover:bg-gray-200 dark:hover:bg-gray-700"
+                    onClick={() => handleStatChange(index, item.label)}
+                  >
+                    {item.label}
+                  </div>
+                ))}
             </div>
           </div>
         );

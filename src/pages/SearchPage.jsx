@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { IoMdClose } from "react-icons/io";
+import { RxCross1 } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import PageHeader from "../components/PageHeader";
@@ -8,51 +9,54 @@ import Spinner from "../components/Spinner";
 import { useApiData } from "../context/ApiContext";
 import { useSearch } from "../context/SearchContext";
 import { useSearchResults } from "../hooks/useSearchResult";
-import History from "../layouts/search/History";
 import GeoLocationBtn from "../layouts/search/GeoLocationBtn";
+import History from "../layouts/search/History";
 import Results from "../layouts/search/Results";
-import { RxCross1 } from "react-icons/rx";
+import { useCallback } from "react";
 
 const SearchPage = () => {
-  const { searchHistory, clearAllHistory, addToSearchHistory } = useSearch();
   const { search } = useApiData();
-  const searchBarRef = useRef(null);
+  const { searchHistory, clearAllHistory, addToSearchHistory } = useSearch();
+
   const [query, setQuery] = useState("");
   const { searchResults, isLoading } = useSearchResults(query);
+
+  const searchBarRef = useRef(null);
   const navigate = useNavigate();
 
-  const handleSubmit = (e, city) => {
-    e.preventDefault();
+  const handleSubmit = useCallback(
+    (cityName) => {
+      const trimmedCity = cityName ?? query.trim();
+      if (!trimmedCity || trimmedCity.length < 3)
+        return toast.warning("Enter a valid city name");
 
-    const trimmedCity = city ?? query.trim();
-    if (!trimmedCity || trimmedCity.length < 3)
-      return toast.warning("Enter a valid city name");
+      navigate(-1, { replace: true });
+      search(trimmedCity);
+      searchBarRef.current.blur();
+      setQuery("");
+      addToSearchHistory(trimmedCity);
+    },
+    [search, addToSearchHistory],
+  );
 
-    search(trimmedCity);
-    searchBarRef.current.blur();
-    navigate("/", { replace: true });
-    setQuery("");
-    addToSearchHistory(trimmedCity);
-  };
-
-  const handleResultClick = (result) => {
-    const { lat, lon, address_line1 } = result.properties;
-    const selectedName = address_line1;
-    search(lat, lon);
-    navigate("/", { replace: true });
-    searchBarRef.current.blur();
-    addToSearchHistory(selectedName, lat, lon);
-    setQuery("");
-  };
+  const handleResultClick = useCallback(
+    (result) => {
+      const { lat, lon, address_line1 } = result.properties;
+      const selectedName = address_line1;
+      search(lat, lon);
+      navigate("/", { replace: true });
+      searchBarRef.current.blur();
+      addToSearchHistory(selectedName, lat, lon);
+      setQuery("");
+    },
+    [search, addToSearchHistory],
+  );
   return (
     <div className="fixed inset-0 z-40 h-full overflow-y-auto bg-white text-sm text-black dark:bg-[#1d1d1d] dark:text-white">
       <PageHeader name={"search"} />
       <div className="ml-2 mt-12 flex justify-center gap-2">
         {/* ============================ SearchBar ============================ */}
-        <form
-          onSubmit={handleSubmit}
-          className="DesktopSearch flex w-[80%] items-center rounded-lg border px-4 py-1.5"
-        >
+        <div className="SearchBar flex w-[75%] items-center rounded-lg border px-4 py-1.5">
           <CiSearch size={20} className="text-black/80 dark:text-white/80" />
           <input
             ref={searchBarRef}
@@ -62,6 +66,7 @@ const SearchPage = () => {
             autoFocus
             placeholder="search ... "
             className="ml-2 w-full bg-inherit outline-none"
+            onKeyDown={(e) => e.key === "Enter" && handleSubmit(query)}
           />
           <button
             type="button"
@@ -74,9 +79,9 @@ const SearchPage = () => {
           >
             {isLoading ? <Spinner /> : <IoMdClose />}
           </button>
-        </form>
+        </div>
         {/* ============================// SearchBar ============================ */}
-        <GeoLocationBtn search={search} />
+        <GeoLocationBtn />
       </div>
       <br />
       <div className="px-5">
@@ -93,7 +98,7 @@ const SearchPage = () => {
       </div>
       <button
         onClick={() => navigate(-1)}
-        className="absolute bottom-8 left-1/2 right-1/2 size-11 p-3 -translate-x-1/2 rounded-full bg-black/80  text-white shadow active:shadow-none dark:bg-white/55 dark:text-black dark:shadow-black"
+        className="absolute bottom-8 left-1/2 right-1/2 size-11 -translate-x-1/2 rounded-full bg-black/80 p-3 text-white shadow active:shadow-none dark:bg-white/55 dark:text-black dark:shadow-black"
       >
         <RxCross1 className="h-full w-full" />
       </button>
