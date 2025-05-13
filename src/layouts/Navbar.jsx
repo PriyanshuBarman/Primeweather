@@ -15,7 +15,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   return (
-    <nav className="fixed right-0 top-0 z-40 flex h-10 w-full items-center justify-center gap-1 bg-gradient-to-b from-[#f5f5f5] via-[#f5f5f5] to-transparent pb-2 pt-0 font-oxanium text-black/90 shadow-[inset_1px_-.4px_2px_0px_ttt] dark:bg-transparent dark:bg-none dark:to-[#242424] dark:text-white dark:backdrop-blur-2xl md:h-12 md:justify-normal md:gap-0 md:from-white md:via-white md:to-white md:pt-2.5 md:shadow-sm md:shadow-black/10 md:backdrop-blur-2xl">
+    <nav className="fixed right-0 top-0 z-10 flex h-10 w-full items-center justify-center gap-1 bg-gradient-to-b from-[#f5f5f5] via-[#f5f5f5] to-transparent pb-2 pt-0 font-oxanium text-black/90 shadow-[inset_1px_-.4px_2px_0px_ttt] dark:bg-transparent dark:bg-none dark:to-[#242424] dark:text-white dark:backdrop-blur-2xl md:h-12 md:justify-normal md:gap-0 md:from-white md:via-white md:to-white md:pt-2.5 md:shadow-sm md:shadow-black/10 md:backdrop-blur-2xl">
       <div
         className={`Location flex h-full w-[60%] flex-col items-center justify-start pt-2 md:fixed md:left-[0%] md:flex-row md:pt-0 ${isLoading ? "invisible" : "visible"}`}
       >

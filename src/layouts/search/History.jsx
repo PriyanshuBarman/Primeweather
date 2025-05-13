@@ -3,7 +3,7 @@ import { MdOutlineHistory } from "react-icons/md";
 
 function History({ handleSubmit, searchHistory, activeIdx, clearAllHistory }) {
   return (
-    <ul className="History w-full">
+    <div className="History w-full">
       <div className="w-full text-right">
         <button
           onClick={clearAllHistory}
@@ -15,20 +15,22 @@ function History({ handleSubmit, searchHistory, activeIdx, clearAllHistory }) {
           Clear History
         </button>
       </div>
-      {searchHistory?.map((item, idx) => (
-        <li
-          key={idx}
-          onClick={(e) => handleSubmit(item.city)}
-          className={`${activeIdx === idx && "bg-input"} dark:text-white hover:bg-black/5 dark:hover:bg-white/20 flex cursor-pointer place-items-center gap-4 rounded px-4 py-4`}
-        >
-          <MdOutlineHistory
-            size={18}
-            className="text-black/70 dark:text-white/70"
-          />
-          {item.city}
-        </li>
-      ))}
-    </ul>
+      <ul className="mt-4">
+        {searchHistory?.map((item, idx) => (
+          <li
+            key={idx}
+            onClick={(e) => handleSubmit(item.city)}
+            className={`${activeIdx === idx && "bg-input"} flex cursor-pointer place-items-center gap-4 rounded px-4 py-4 hover:bg-black/5 dark:text-white dark:hover:bg-white/20`}
+          >
+            <MdOutlineHistory
+              size={18}
+              className="text-black/70 dark:text-white/70"
+            />
+            {item.city}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 

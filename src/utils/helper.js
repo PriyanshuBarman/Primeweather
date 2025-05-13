@@ -78,4 +78,11 @@ export function getUvHealthConcern(value) {
     return "";
   }
 }
-
+export const errorMessages = {
+  429: "API request limit reached. Please try again later.",
+  400: "Invalid city name. Please check your spelling.",
+  401: "Authentication error. Please check API credentials.",
+  404: "Location not found. Please try a different city.",
+  500: "Server error occurred. Please try again later.",
+  503: "Service temporarily unavailable. Please try again soon.",
+};

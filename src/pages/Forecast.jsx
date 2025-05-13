@@ -81,7 +81,7 @@ const Forecast = () => {
         </div>
 
         <div className="mt-2 w-full space-y-10 md:flex md:flex-row md:items-center md:justify-around md:pb-5">
-          <div className="w-full md:h-full md:w-auto md:space-y-10">
+          <div className="w-full md:h-full md:w-[50%] md:space-y-10">
             <PreviewCard index={activeIndex} />
             {isDeskTop && <ForecastSunTimes index={activeIndex} />}
           </div>

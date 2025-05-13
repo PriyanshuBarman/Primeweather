@@ -22,9 +22,7 @@ const Widget = ({ name, data, unit, icon, isHidden, label }) => {
       }
     };
 
-    if (isClicked) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
+    if (isClicked) document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);

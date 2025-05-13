@@ -43,12 +43,12 @@ const Sidebar = () => {
       document.body.classList.remove("overflow-hidden");
     };
   }, [isSidebarOpen]);
-  
+
   return (
     <>
       <button
         onClick={toggleSidebar}
-        className="toggle-btn fixed left-2 top-2 z-50 h-7 w-10 overflow-hidden rounded-md bg-white p-0.5 text-black shadow-md shadow-black/30 dark:bg-[#484848] dark:text-white"
+        className="toggle-btn fixed left-2 top-2 z-30 h-7 w-10 overflow-hidden rounded-md bg-white p-0.5 text-black shadow-md shadow-black/30 dark:bg-[#484848] dark:text-white"
       >
         <RxCross1
           className={`absolute left-1/2 top-1/2 size-[70%] -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ease-in-out ${isSidebarOpen ? "visible opacity-100" : "invisible -translate-y-12 opacity-0"}`}
@@ -61,14 +61,14 @@ const Sidebar = () => {
 
       <div
         onClick={toggleSidebar}
-        className={`fixed inset-0 left-0 z-40 h-screen w-full bg-black/80 text-base transition-opacity md:w-full ${
+        className={`fixed inset-0 left-0 z-20 h-screen w-full bg-black/80 text-base transition-opacity md:w-full ${
           isSidebarOpen ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
         {/* Sidebar container */}
         <aside
           onClick={(e) => e.stopPropagation()}
-          className={`sidebar fixed left-0 top-0 z-50 h-full w-[80%] transform rounded-r-[4rem] border-white/50 bg-gray-100 text-black/80 transition-transform duration-300 ease-out dark:border-r md:w-[30%] md:pl-9 ${
+          className={`sidebar fixed left-0 top-0 h-full w-[80%] transform rounded-r-[4rem] border-white/50 bg-gray-100 text-black/80 transition-transform duration-300 ease-out dark:border-r md:w-[30%] md:pl-9 ${
             isSidebarOpen ? "translate-x-0" : "-translate-x-full"
           } dark:bg-[#1a1a1a] dark:text-white`}
         >

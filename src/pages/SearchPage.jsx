@@ -30,8 +30,8 @@ const SearchPage = () => {
       if (!trimmedCity || trimmedCity.length < 3)
         return toast.warning("Enter a valid city name");
 
-      navigate(-1, { replace: true });
       search(trimmedCity);
+      navigate(-1, { replace: true });
       searchBarRef.current.blur();
       setQuery("");
       addToSearchHistory(trimmedCity);

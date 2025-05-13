@@ -1,21 +1,17 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { toast } from "react-toastify";
 import useLocalStorage from "../hooks/useLocalStorage";
 import {
+  errorMessages,
   getImageName,
   getUvHealthConcern,
   weatherDescription,
 } from "../utils/helper";
 import {
-  isDaytime,
   getLongDayName,
   getShortDayName,
   getTime,
+  isDaytime,
 } from "../utils/timeConverter";
 
 const ApiContext = createContext();
@@ -97,6 +93,7 @@ export const ApiProvider = ({ children }) => {
     } catch (error) {
       console.error("Search Error:", error);
       setErrCode(error.message);
+      toast.error(errorMessages[error.message]);
     } finally {
       setIsLoading(false);
     }

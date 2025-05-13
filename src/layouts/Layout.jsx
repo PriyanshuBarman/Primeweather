@@ -2,16 +2,14 @@ import { useMediaQuery } from "react-responsive";
 import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useApiData } from "../context/ApiContext.jsx";
+import ErrorModal from "../components/ErrorModal.jsx";
 import { useTheme } from "../context/ThemeContext.jsx";
-import ErrPage from "../pages/ErrPage.jsx";
 import BottomNavbar from "./BottomNavbar.jsx";
 import DeskTopSidebar from "./DeskTopSidebar.jsx";
 import Footer from "./Footer.jsx";
 import Navbar from "./Navbar.jsx";
 import ScrollToTop from "./ScrollToTop.jsx";
 const Layout = () => {
-  const { errCode } = useApiData();
   const { currentTheme } = useTheme();
   const isDeskTop = useMediaQuery({ minWidth: 768 });
 
@@ -19,12 +17,12 @@ const Layout = () => {
     <div className="h-full w-full">
       {isDeskTop && <DeskTopSidebar />}
       {isDeskTop && <Navbar />}
-
-      {!errCode ? <Outlet /> : <ErrPage />}
+      <ErrorModal />
+      <Outlet />
       <ToastContainer
         hideProgressBar
         draggable
-        draggablePercent={50}
+        draggablePercent={30}
         theme={currentTheme}
       />
 

@@ -4,12 +4,12 @@ import { PiCity } from "react-icons/pi";
 function Results({ searchResults, handleResultClick, selectedIndex }) {
   if (!searchResults?.length) return;
   return (
-    <ul className="Search-Results  max-sm:text-black/80 max-sm:dark:text-white/80">
+    <ul className="Search-Results max-sm:text-black/80 max-sm:dark:text-white/80">
       {searchResults?.map((result, index) => (
         <li
           key={index}
           onMouseDown={() => handleResultClick(result)}
-          className={`flex w-full cursor-pointer items-center gap-4 rounded-md px-4 py-4 hover:bg-black/5 dark:hover:bg-white/15 ${
+          className={`flex w-full cursor-pointer items-center gap-4 rounded-md px-4 py-3 hover:bg-black/5 dark:hover:bg-white/15 lg:py-4 ${
             index === selectedIndex ? "bg-black/5 dark:bg-white/20" : ""
           }`}
         >

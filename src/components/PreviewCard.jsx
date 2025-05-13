@@ -19,7 +19,7 @@ const PreviewCard = ({ index }) => {
   } = data;
 
   return (
-    <div className="hover-scale-2 relative m-auto mb-4 mt-3 flex h-[272px] w-[96%] flex-col items-center rounded-[1.5rem] bg-gradient-to-br from-blue-400 to-blue-700 text-white shadow-lg shadow-black/50 dark:from-[#1d1d1d] dark:to-[#474747] dark:shadow-black md:h-[320px] md:w-[100%]">
+    <div className="hover-scale-2 relative m-auto mb-4 mt-3 flex h-[272px] w-[96%] flex-col items-center rounded-[1.5rem] bg-gradient-to-br from-blue-400 to-blue-700 text-white shadow-lg shadow-black/50 dark:from-[#1d1d1d] dark:to-[#474747] dark:shadow-black md:h-[320px] md:min-w-[100%]">
       {<Time {...{ index, timeZone, city }} />}
 
       <img
@@ -38,7 +38,7 @@ const PreviewCard = ({ index }) => {
           Feels like
           <span className="text-base md:text-xl">{feelsLike}°c</span>
         </h2>
-        <h2 className="font-oxanium mt-2 text-lg font-[700] text-white/70 md:text-2xl">
+        <h2 className="mt-2 font-oxanium text-lg font-[700] text-white/70 md:text-2xl">
           {minTemp}° / {maxTemp}°
         </h2>
       </div>

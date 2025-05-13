@@ -16,7 +16,7 @@ const HourlyDetails = () => {
       <h2 className="mt-8 w-full pl-4 text-sm font-[500] leading-3">
         Hourly Details
       </h2>
-      <section className="w-[97%] select-none space-y-8 rounded-xl border pb-2 pt-4 shadow-sm dark:border-white/10 dark:bg-[#171717] dark:text-white dark:shadow-black/40">
+      <section className="w-[97%] select-none space-y-8 rounded-xl border pb-2 pt-4 shadow-sm dark:border-white/15 dark:bg-[#1d1d1d] dark:text-white dark:shadow-md dark:shadow-black">
         <div className="Filter-Tabs space-x-2 pl-4 text-xs">
           {filterTabs.map((tabName) => (
             <button
