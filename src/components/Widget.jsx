@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useApiData } from "../context/ApiContext";
 import WidgetSkeleton from "./skeletons/WidgetSkeleton";
 import Tooltip from "./Tooltip";
+import ReactGA from "react-ga4";
 
 const Widget = ({ name, data, unit, icon, isHidden, label }) => {
   const { isLoading } = useApiData();
@@ -12,6 +13,12 @@ const Widget = ({ name, data, unit, icon, isHidden, label }) => {
   const handleClick = () => {
     setShowTooltip((prev) => !prev);
     setIsClicked(true);
+
+    ReactGA.event({
+      category: "Widget",
+      action: `Clicked widget`,
+      label,
+    });
   };
 
   useEffect(() => {

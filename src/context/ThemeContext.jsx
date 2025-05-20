@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
+import ReactGA from "react-ga4";
 
 // Step 1: Create a context to hold theme data
 const ThemeContext = createContext();
@@ -20,6 +21,11 @@ export const ThemeProvider = ({ children }) => {
   // Step 4: Toggle theme function (simplified)
   const toggleTheme = () => {
     setCurrentTheme(currentTheme === "dark" ? "light" : "dark");
+
+    ReactGA.event({
+      category: "Theme",
+      action: `Change theme to: ${currentTheme}`,
+    });
   };
 
   return (

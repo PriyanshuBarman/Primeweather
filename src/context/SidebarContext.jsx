@@ -1,5 +1,6 @@
 import React, { createContext, useContext } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
+import ReactGA from "react-ga4";
 
 const SidebarContext = createContext();
 
@@ -18,13 +19,19 @@ export const SidebarProvider = ({ children }) => {
     windDirection: false,
     sunriseSunset: false,
   });
-  const isAllWidgetsHidden = Object.values(hiddenWidgets).every(v => v);
+  const isAllWidgetsHidden = Object.values(hiddenWidgets).every((v) => v);
 
   const toggleWidget = (widgetName) => {
     setHiddenWidgets((prevState) => ({
       ...prevState,
       [widgetName]: !prevState[widgetName],
     }));
+
+    ReactGA.event({
+      category: "ToggleWidget",
+      action: `Hide/Unhide widget`,
+      label: widgetName,
+    });
   };
 
   return (

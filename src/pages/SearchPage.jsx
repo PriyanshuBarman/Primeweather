@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { IoMdClose } from "react-icons/io";
 import { RxCross1 } from "react-icons/rx";
@@ -13,10 +13,15 @@ import GeoLocationBtn from "../layouts/search/GeoLocationBtn";
 import History from "../layouts/search/History";
 import Results from "../layouts/search/Results";
 import { useCallback } from "react";
+import ReactGA from "react-ga4";
 
 const SearchPage = () => {
   const { search } = useApiData();
   const { searchHistory, clearAllHistory, addToSearchHistory } = useSearch();
+
+  useEffect(() => {
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname });
+  }, []);
 
   const [query, setQuery] = useState("");
   const { searchResults, isLoading } = useSearchResults(query);
@@ -35,6 +40,12 @@ const SearchPage = () => {
       searchBarRef.current.blur();
       setQuery("");
       addToSearchHistory(trimmedCity);
+
+      ReactGA.event({
+        category: "Query",
+        action: "Search Query",
+        label: query,
+      });
     },
     [search, addToSearchHistory],
   );

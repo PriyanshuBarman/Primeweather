@@ -9,6 +9,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import Socials from "../components/Socials";
 import { useSidebar } from "../context/SidebarContext";
 import { useTheme } from "../context/ThemeContext";
+import ReactGA from "react-ga4";
 
 const Sidebar = () => {
   const {
@@ -20,7 +21,14 @@ const Sidebar = () => {
   const { currentTheme, toggleTheme } = useTheme();
   const [isWidgetTabOpen, setIsWidgetTabOpen] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const toggleSidebar = () => setIsSidebarOpen((prevState) => !prevState);
+  const toggleSidebar = () => {
+    setIsSidebarOpen((prevState) => !prevState);
+
+    ReactGA.event({
+      category: "Sidebar",
+      action: `Open Sidebar`,
+    });
+  };
   const navigate = useNavigate();
   const widgetList = [
     "uvIndex",

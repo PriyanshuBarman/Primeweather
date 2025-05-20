@@ -9,6 +9,7 @@ import { useSearchResults } from "../../hooks/useSearchResult";
 import GeoLocationBtn from "./GeoLocationBtn";
 import History from "./History";
 import Results from "./Results";
+import ReactGA from "react-ga4";
 
 const DesktopSearch = () => {
   const { search } = useApiData();
@@ -51,6 +52,12 @@ const DesktopSearch = () => {
       search(trimmedCity);
       closeAll();
       addToSearchHistory(trimmedCity);
+
+      ReactGA.event({
+        category: "Query",
+        action: "Search Query",
+        label: query,
+      });
     },
 
     [search, closeAll, addToSearchHistory],

@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import ReactGA from "react-ga4";
 import { toast } from "react-toastify";
 import useLocalStorage from "../hooks/useLocalStorage";
 import {
@@ -182,6 +183,7 @@ export const ApiProvider = ({ children }) => {
       sunSet: getTime(dailyData[index]?.values.sunsetTime, timeZone),
     };
   };
+
   const getHourlyData = (index) => {
     const day = getShortDayName(hourlyData[index]?.time, timeZone);
     const time = getTime(hourlyData[index]?.time, timeZone);
@@ -210,6 +212,16 @@ export const ApiProvider = ({ children }) => {
       isDayTime: isDayTime,
     };
   };
+
+  useEffect(() => {
+    if (city === "Mumbai") return;
+
+    ReactGA.event({
+      category: "Search",
+      action: "Search For",
+      label: city,
+    });
+  }, [city]);
 
   return (
     <ApiContext.Provider

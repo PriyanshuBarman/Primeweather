@@ -3,9 +3,10 @@ import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useApiData } from "../../context/ApiContext";
+import ReactGA from "react-ga4";
 
 const GeoLocationBtn = ({ closeAll }) => {
-  const {search} = useApiData();
+  const { search } = useApiData();
   const isDeskTop = useMediaQuery({ minWidth: 768 });
   const navigate = useNavigate();
 
@@ -18,6 +19,11 @@ const GeoLocationBtn = ({ closeAll }) => {
         isDeskTop ? closeAll() : navigate("/", { replace: true });
         const { latitude, longitude } = coords;
         search(latitude, longitude);
+
+        ReactGA.event({
+          category: "Location",
+          action: `Geolocation Btn Clicked`,
+        });
       },
       (err) => {
         if (err.code === err.PERMISSION_DENIED) {
@@ -39,9 +45,9 @@ const GeoLocationBtn = ({ closeAll }) => {
       type="button"
       onClick={handleClick}
       aria-label="Use current location"
-      className="flex items-center justify-center rounded-full bg-black/80 p-2 text-white shadow-md dark:shadow-black/50 dark:bg-white/15 dark:text-white"
+      className="flex items-center justify-center rounded-full bg-black/80 p-2 text-white shadow-md dark:bg-white/15 dark:text-white dark:shadow-black/50"
     >
-      <MdMyLocation size={20} className="min-w-4 min-h-4" />
+      <MdMyLocation size={20} className="min-h-4 min-w-4" />
     </button>
   );
 };

@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useParams } from "react-router-dom";
 import { FreeMode } from "swiper/modules";
@@ -10,19 +10,20 @@ import PageHeader from "../components/PageHeader";
 import PreviewCard from "../components/PreviewCard";
 import MadeWithLove from "../components/skeletons/MadeWithLove";
 import ForecastSkeleton from "../components/skeletons/ForecastSkeleton";
+import ReactGA from "react-ga4";
 
 const Forecast = () => {
   const { getDailyData, dailyData, isLoading } = useApiData();
-
   const { index } = useParams();
   const [activeIndex, setActiveIndex] = useState(Number(index));
 
-  const handleCardClick = (idx) => {
-    setActiveIndex(idx);
-  };
+  useEffect(() => {
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname });
+  }, []);
 
   const isDeskTop = useMediaQuery({ minWidth: 768 });
   if (isLoading) return <ForecastSkeleton />;
+  
   return (
     <div className="w-full bg-[#fafafa] pb-14 dark:bg-[#1d1d1d] md:flex md:h-full md:justify-between md:gap-5 md:pb-0 md:pl-28">
       <div className="container flex h-full w-full flex-col items-center justify-center gap-y-5 overflow-hidden pt-10 font-oxanium dark:text-white md:w-[75%]">
@@ -51,7 +52,7 @@ const Forecast = () => {
                   <SwiperSlide key={dayName}>
                     <div
                       key={idx}
-                      onClick={() => handleCardClick(idx)}
+                      onClick={() => setActiveIndex(idx)}
                       className={`relative flex h-[6.5rem] w-[3.9rem] cursor-pointer justify-center overflow-hidden rounded-[1.7em] shadow-[1.5px_1px_2px_0px] shadow-black/40 dark:shadow-black md:h-[5.4rem] md:w-44 ${
                         idx === activeIndex
                           ? "scale-110 bg-gradient-to-l from-blue-400 to-blue-300 text-white dark:from-white/30"

@@ -3,6 +3,12 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
 
+import ReactGA from "react-ga4";
+
+ReactGA.initialize("G-GWJB5P73CQ");
+
+ReactGA.send({ hitType: "pageview", page: window.location.pathname });
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <App />,
