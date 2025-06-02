@@ -77,7 +77,7 @@ const DesktopSearch = () => {
   return (
     <>
       <div className="fixed right-[8%] z-50 flex gap-4">
-        <div className="DesktopSearch flex w-[450px] items-center gap-4 rounded-lg border bg-white pl-12 pr-4 focus-within:ring-1 focus-within:ring-black/50 dark:bg-[#363636] focus-within:dark:bg-black">
+        <div className="DesktopSearch flex w-[450px] items-center gap-4 rounded-lg border-[1.5px] border-neutral-400 bg-white pl-12 pr-4 focus-within:ring-1 focus-within:ring-black/50 dark:bg-[#363636] focus-within:dark:bg-black">
           <CiSearch
             size={20}
             className="absolute left-4 text-black/80 dark:text-white/80"

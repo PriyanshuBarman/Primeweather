@@ -29,7 +29,7 @@ export function useSearchResults(query) {
       } finally {
         setLoading(false);
       }
-    }, 400); // debounce
+    }, 300); // debounce
 
     return () => {
       clearTimeout(timer);

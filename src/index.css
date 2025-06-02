@@ -25,10 +25,10 @@ body {
 }
 
 .hover-scale {
-  @apply ease-linear md:transition-all md:hover:scale-105;
+  @apply ease-linear md:transition-all md:duration-300 md:hover:scale-[1.025];
 }
 .hover-scale-2 {
-  @apply ease-linear md:transition-all md:duration-[700ms] md:hover:scale-[1.015];
+  @apply ease-linear md:transition-all md:duration-[750ms] md:hover:scale-[1.015];
 }
 
 .bottomToTop {
@@ -86,16 +86,16 @@ meter {
 
 @media (max-width: 768px) {
   .Toastify__toast-container {
-    width: 70% !important; 
+    width: 70% !important;
     top: 20px !important;
-    right: 4px !important; 
+    right: 4px !important;
     left: auto !important;
     font-size: 0.85rem !important;
   }
   .Toastify__toast {
-    min-height: auto !important; 
+    min-height: auto !important;
     height: auto !important;
-    border-radius: 8px !important; 
+    border-radius: 8px !important;
     padding: 14px 16px !important;
   }
 }

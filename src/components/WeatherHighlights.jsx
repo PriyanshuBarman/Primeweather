@@ -101,15 +101,13 @@ const WeatherHighlights = ({ index }) => {
           </div>
         </div>
       ) : (
-        <>
-          <h1 className="hover-scale flex h-8 w-[95%] items-center justify-center rounded-full bg-black/5 text-[.9rem] font-[500] italic shadow-md dark:bg-white/10 dark:shadow-black md:mt-3 md:h-7 md:min-w-full md:bg-transparent md:text-lg md:font-[500] md:shadow-none md:dark:bg-transparent">
-            Weather WeatherHighlights
-          </h1>
-        </>
+        <h1 className="hover-scale flex h-8 w-[95%] items-center justify-center rounded-full bg-black/5 text-[.9rem] font-[500] italic shadow-md dark:bg-white/10 dark:shadow-black md:mt-3 md:h-7 md:min-w-full md:bg-transparent md:text-lg md:font-[500] md:shadow-none md:dark:bg-transparent">
+          Weather WeatherHighlights
+        </h1>
       )}
 
       {/* Cards Container */}
-      <div className="cards-container mt-5 flex w-full flex-wrap items-center justify-evenly gap-4">
+      <div className="cards-container mt-5 flex flex-wrap justify-evenly gap-4">
         {widgets.map((widget, idx) => (
           <Widget
             key={idx}

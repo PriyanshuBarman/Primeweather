@@ -8,10 +8,18 @@ const ErrorModal = () => {
 
   return (
     <div className="fixed left-0 top-0 z-50 flex h-lvh w-full items-center justify-center bg-black/50 backdrop-blur-md">
-      <div className="relative bottom-20 w-[90%] space-y-16 rounded-lg border-r border-t bg-white p-6 shadow-lg dark:bg-[#2e2e2e] dark:text-white dark:shadow-black md:w-[40%] md:space-y-40 md:rounded-xl">
-        <h2 className="mb-4 md:text-xl md:font-[500]">
-          {errorMessages[errCode]}
+      <div className="relative bottom-20 w-[90%] space-y-10 rounded-lg border-r border-t bg-white p-6 shadow-lg dark:border-white/30 dark:bg-[#252525] dark:text-white dark:shadow-black md:w-[40%] md:rounded-xl">
+        <img
+          src={errCode == 429 ? "CoffeeBreak.webp" : "SomethingWentWrong.webp"}
+          alt=""
+          className="mx-auto w-44 sm:w-60"
+        />
+
+        <h2 className="text-center md:text-xl md:font-[500]">
+          {errorMessages[errCode] ||
+            "Something went wrong, Please try again later !"}
         </h2>
+
         <div className="flex justify-end">
           <button
             onClick={() => window.location.reload()}

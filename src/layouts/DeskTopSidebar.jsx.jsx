@@ -41,19 +41,23 @@ const DeskTopSidebar = () => {
         } bg-white text-black dark:bg-[#272626] dark:text-white`}
       >
         <div
-          className="logo hover-scale absolute top-1 ml-3 flex items-center gap-3"
+          className="logo hover-scale absolute top-2 ml-3 flex items-center gap-3"
           onClick={toggleSidebar}
         >
-          <img src="/Logo.png" alt="" className="size-9 rounded-full" />
-          <span
+          <img
+            src="/Logo.png"
+            alt=""
+            className="size-10 rounded-full shadow-lg"
+          />
+          <h1
             className={`absolute left-14 top-2 w-40 text-xl font-[500] italic transition-all ease-out ${isSidebarOpen ? "-translate-x-0 scale-100 opacity-100 duration-300" : "-translate-x-24 scale-0 opacity-0 duration-100"}`}
           >
             Prime Weather
-          </span>
+          </h1>
         </div>
         <button
           onClick={toggleSidebar}
-          className={`group relative ml-2 h-7 w-12 rounded-md bg-slate-100 p-1 text-black shadow-md hover:scale-110 dark:bg-[#484848] dark:text-white ${!isSidebarOpen ? "translate-x-0 duration-100" : "translate-x-56 duration-200"}`}
+          className={`group relative ml-2 mt-4 h-7 w-12 rounded-md bg-slate-100 p-1 text-black shadow-md hover:scale-110 dark:bg-[#484848] dark:text-white ${!isSidebarOpen ? "translate-x-0 duration-100" : "translate-x-56 duration-200"}`}
         >
           {isSidebarOpen ? (
             <MdCloseFullscreen className="size-full" />
@@ -62,7 +66,7 @@ const DeskTopSidebar = () => {
           )}
         </button>
 
-        <ul className="mt-5 space-y-4 font-[500]">
+        <ul className="mt-4 space-y-4 font-[500]">
           {/* Home */}
           <li className="group relative flex">
             <NavLink

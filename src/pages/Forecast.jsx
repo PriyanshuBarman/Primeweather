@@ -23,7 +23,7 @@ const Forecast = () => {
 
   const isDeskTop = useMediaQuery({ minWidth: 768 });
   if (isLoading) return <ForecastSkeleton />;
-  
+
   return (
     <div className="w-full bg-[#fafafa] pb-14 dark:bg-[#1d1d1d] md:flex md:h-full md:justify-between md:gap-5 md:pb-0 md:pl-28">
       <div className="container flex h-full w-full flex-col items-center justify-center gap-y-5 overflow-hidden pt-10 font-oxanium dark:text-white md:w-[75%]">
@@ -86,7 +86,7 @@ const Forecast = () => {
             <PreviewCard index={activeIndex} />
             {isDeskTop && <ForecastSunTimes index={activeIndex} />}
           </div>
-          <div className="hover-scale-2 rounded-3xl md:h-[97%] md:w-[40%] md:bg-white md:pt-2 md:shadow-md md:dark:bg-[#1c1c1c] md:dark:shadow-md md:dark:shadow-black">
+          <div className="hover-scale-2 rounded-3xl border-t md:h-[97%] md:w-[40%] md:bg-white md:pt-2 md:shadow-md md:dark:bg-[#1c1c1c] md:dark:shadow-md md:dark:shadow-black">
             <WeatherHighlights index={activeIndex} />
           </div>
         </div>

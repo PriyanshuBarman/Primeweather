@@ -15,7 +15,7 @@ const DailyForecast = () => {
   if (isLoading) return <DailyForecastSkeleton />;
   return (
     <section className="hover-scale-2 mt-3 flex w-full flex-col items-center justify-center gap-4 bg-white dark:bg-[#1c1c1c] dark:shadow-black md:mt-6 md:gap-7 md:rounded-3xl md:px-9 md:pb-10 md:shadow-md md:dark:border-t md:dark:border-white/40 xl:w-[26%]">
-      <h1 className="hover-scale flex h-8 w-[95%] items-center justify-center rounded-full bg-black/5 text-[.9rem] font-[500] italic shadow-md dark:bg-white/10 dark:shadow-black md:mt-3 md:h-7 md:w-full md:bg-transparent md:text-lg md:font-[500] md:shadow-none md:dark:bg-transparent">
+      <h1 className="hover-scale mb-2 flex h-8 w-[95%] items-center justify-center rounded-full bg-black/5 text-[.9rem] font-[500] italic shadow-md dark:bg-white/10 dark:shadow-black md:mt-3 md:h-7 md:w-full md:bg-transparent md:text-lg md:font-[500] md:shadow-none md:dark:bg-transparent">
         Next 5 days Forecast
       </h1>
       {dailyData?.map((_, index) => (
@@ -70,7 +70,7 @@ const Card = memo(({ index }) => {
         {precipitationProbability > 10 ? (
           <h5 className="precipitation relative left-1 top-1 text-sm font-[500]">
             {precipitationProbability}%
-            <WiRaindrops className="absolute -left-10 -top-4 size-14 fill-blue-600 md:-left-12 md:fill-blue-800" />
+            <WiRaindrops className="absolute -left-10 -top-4 size-14 fill-blue-600 md:-left-12 md:fill-blue-100 md:dark:fill-blue-500" />
           </h5>
         ) : (
           <h2 className="mt-1.5 items-center text-sm font-[500]">
