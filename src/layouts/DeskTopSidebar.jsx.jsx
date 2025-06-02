@@ -44,7 +44,7 @@ const DeskTopSidebar = () => {
           className="logo hover-scale absolute top-1 ml-3 flex items-center gap-3"
           onClick={toggleSidebar}
         >
-          <img src="/Logo.png" alt="" className="size-9 rounded-full" />
+          <img src="/Logo.png" alt="" className="size-9 shadow-lg rounded-full" />
           <span
             className={`absolute left-14 top-2 w-40 text-xl font-[500] italic transition-all ease-out ${isSidebarOpen ? "-translate-x-0 scale-100 opacity-100 duration-300" : "-translate-x-24 scale-0 opacity-0 duration-100"}`}
           >

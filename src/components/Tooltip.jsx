@@ -14,11 +14,11 @@ const Tooltip = ({ name, showTooltip }) => {
       }`}
     >
       <div className="relative">
-        <div className="flex items-center gap-1.5 whitespace-nowrap rounded-md bg-gradient-to-r from-black/40 to-black/70 px-2 py-1 text-sm font-[500] text-white shadow backdrop-blur-sm hover:scale-105 dark:from-white/60 dark:to-white/90 dark:text-black md:dark:font-semibold">
+        <div className="flex items-center gap-1.5 whitespace-nowrap rounded-md bg-black/80 px-2 py-1 text-sm font-[500] text-white shadow backdrop-blur-sm hover:scale-105 dark:bg-white/90 dark:text-black md:dark:font-semibold">
           <BiSolidHide size={20} />
           Hide
         </div>
-        <div className="absolute bottom-[-8px] left-1/2 -translate-x-1/2 border-l-[4px] border-r-[8px] border-t-[8px] border-l-transparent border-r-transparent border-t-black/50 dark:border-t-white/75"></div>
+        <div className="absolute bottom-[-8px] left-1/2 -translate-x-1/2 border-l-[4px] border-r-[8px] border-t-[8px] border-l-transparent border-r-transparent border-t-black/80 dark:border-t-white/90"></div>
       </div>
     </div>
   );

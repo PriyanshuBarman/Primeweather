@@ -32,9 +32,7 @@ const HourlyDetails = () => {
         <div className="flex gap-6 overflow-auto px-4">
           {hourlyData?.map((_, index) => (
             <div key={index}>
-              {selectedTab === "wind" && (
-                <WindDirection {...{ index }} />
-              )}
+              {selectedTab === "wind" && <WindDirection {...{ index }} />}
               {selectedTab === "humidity" && <Humidity {...{ index }} />}
               {selectedTab === "temperature" && <Temperature {...{ index }} />}
               {selectedTab === "precipitation" && (
@@ -56,8 +54,11 @@ const WindDirection = memo(({ index }) => {
 
   return (
     <div className="relative flex h-44 flex-col items-center justify-end gap-4 dark:text-white">
-      <div className="flex h-full w-full flex-col items-center justify-end gap-8">
-        <span className="text-nowrap text-xs">{windSpeed} km/h</span>
+      <div className="flex h-full w-full flex-col items-center justify-end gap-4">
+        <p className="flex flex-col items-center gap-2 text-nowrap text-xs">
+          {windSpeed} km/h
+          <span className="font-semibold">N</span>
+        </p>
         <CiLocationArrow1
           className="mb-8 size-10 text-black/70 dark:text-white/80"
           style={{
@@ -79,7 +80,7 @@ const Humidity = memo(({ index }) => {
       <div className="flex h-full w-full flex-col items-center justify-end gap-1">
         <span className="text-xs">{humidity}%</span>
         <div
-          className="Level w-9 rounded-2xl"
+          className="Level w-9 rounded-2xl shadow-[0_0_2px_1px] shadow-black/10 dark:shadow-black"
           style={{
             backgroundColor: `rgba(31, 106, 252, ${humidity / 100})`,
             height: `${humidity}%`,
@@ -122,7 +123,7 @@ const Temperature = memo(({ index }) => {
       <div className="flex h-full w-full flex-col items-center justify-end gap-1">
         <span className="text-nowrap text-xs">{temperature} ℃</span>
         <div
-          className="Level w-9 rounded-2xl bg-orange-400 dark:bg-orange-400/70"
+          className="Level w-9 rounded-2xl bg-orange-400 shadow-[0_0_2px_1px] shadow-black/10 dark:bg-orange-400/70 dark:shadow-black"
           style={{
             height: `${temperature + 30}%`,
           }}

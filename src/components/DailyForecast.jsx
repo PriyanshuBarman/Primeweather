@@ -15,7 +15,7 @@ const DailyForecast = () => {
   if (isLoading) return <DailyForecastSkeleton />;
   return (
     <section className="hover-scale-2 mt-3 flex w-full flex-col items-center justify-center gap-4 bg-white dark:bg-[#1c1c1c] dark:shadow-black md:mt-6 md:gap-7 md:rounded-3xl md:px-9 md:pb-10 md:shadow-md md:dark:border-t md:dark:border-white/40 xl:w-[26%]">
-      <h1 className="hover-scale flex h-8 w-[95%] items-center justify-center rounded-full bg-black/5 text-[.9rem] font-[500] italic shadow-md dark:bg-white/10 dark:shadow-black md:mt-3 md:h-7 md:w-full md:bg-transparent md:text-lg md:font-[500] md:shadow-none md:dark:bg-transparent">
+      <h1 className="hover-scale flex h-8 w-[95%] mb-2 items-center justify-center rounded-full bg-black/5 text-[.9rem] font-[500] italic shadow-md dark:bg-white/10 dark:shadow-black md:mt-3 md:h-7 md:w-full md:bg-transparent md:text-lg md:font-[500] md:shadow-none md:dark:bg-transparent">
         Next 5 days Forecast
       </h1>
       {dailyData?.map((_, index) => (
