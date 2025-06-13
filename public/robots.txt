@@ -1,0 +1,3 @@
+User-agent: *
+Disallow:
+Sitemap: https://primeweather.vercel.app/sitemap.xml
